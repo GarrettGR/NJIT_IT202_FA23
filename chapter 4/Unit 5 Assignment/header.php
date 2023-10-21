@@ -44,6 +44,12 @@
             <a href="shipping.php?active=shipping.php">Shipping</a>
         <?php } ?>
 
+        <?php if ($page == 'pets') { ?>
+            <a href="pets.php?active=pets.php" class="active">Pets</a>
+        <?php } else { ?>
+            <a href="pets.php?active=pets.php">Pets</a>
+        <?php } ?>
+
         <?php if ($page == 'index') { ?>
             <a href="index.php?active=index.php" class="active">Home</a> <!-- giving up on a query param in the url -->
         <?php } else { ?>

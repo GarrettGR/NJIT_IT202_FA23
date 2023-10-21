@@ -173,3 +173,17 @@ html {
     height: auto;
     float: right;
 }
+
+.data {
+    padding: .5em;
+    width: 50%;
+    max-width: 1200px;
+    height: auto;
+    border: 1px solid var(--primary);
+    border-radius: 5px;
+    background-color: var(--secondary);
+    color: var(--text);
+    text-align: center;
+    transition: background-color 0.5s ease;
+    border-collapse: collapse;
+}
