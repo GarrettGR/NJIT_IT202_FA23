@@ -15,7 +15,7 @@
         <link rel = 'stylesheet' href = 'style.css'>   
     </head>
     <body>
-        <span><?php $page = 'index'; include_once('header.php'); ?></span><br>
+        <span><?php $page = 'index'; include_once('header.php'); ?></span>
         
         <main>
             <div class="row">
@@ -92,7 +92,7 @@
             </div>
         </main>
 
-        <span><?php include_once('footer.php'); ?></span><br>
+        <span><?php include_once('footer.php'); ?></span>
     </body>
 
 </html>

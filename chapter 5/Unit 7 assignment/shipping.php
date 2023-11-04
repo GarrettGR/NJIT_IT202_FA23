@@ -30,7 +30,7 @@
 
     </head>
     <body>
-        <span><?php $page = 'shipping'; include_once('header.php'); ?></span><br>
+        <span><?php $page = 'shipping'; include_once('header.php'); ?></span>
         <main>
             <h1>Delivery and Shipping Details</h1>
 
@@ -40,7 +40,7 @@
 
             <form action="display_label.php" method="post">
                 <div id="data">
-                    <h1>Address Information: </h1>
+                    <h2>Address Information: </h2>
                     <?php if ($_SERVER['REQUEST_METHOD'] == "POST" && empty($first_name)) { ?>
                         <label style="color: red">First Name:</label>
                     <?php } else { ?>
@@ -86,7 +86,7 @@
                     <?php } ?>
                     <input type="number" name="zip_code" id="zip_code" value="<?php echo htmlspecialchars($zip_code); ?>"><br>
 
-                    <h1>Package Information: </h1>
+                    <h2>Package Information: </h2>
 
                     <?php if ($_SERVER['REQUEST_METHOD'] == "POST" && empty($ship_date)) { ?>
                         <label style="color: red">Ship Date:</label>
@@ -123,6 +123,6 @@
                 </div>
             </form>
         </main>
-        <span><?php include_once('footer.php'); ?></span><br>
+        <span><?php include_once('footer.php'); ?></span>
     </body>
 <html>

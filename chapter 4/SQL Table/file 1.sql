@@ -52,3 +52,5 @@ INSERT INTO bread (breadCategoryID, breadCode, breadName, description, price, da
 -- add price to bread
 UPDATE bread 
 SET price = ROUND(RAND() * 100, 2);
+
+UPDATE bread SET breadName = 'Sunshine' WHERE breadCode = 'BRD-003'

@@ -122,7 +122,7 @@
         </style>
     </head>
     <body>
-        <span><?php $page = 'shipping'; include_once('header.php'); ?></span><br>
+        <span><?php $page = 'shipping'; include_once('header.php'); ?></span>
         <main>
             <h1>Shipping Label: </h1>
             <div class="label">
@@ -146,6 +146,6 @@
                 </figure>
             </div>
         </main>
-        <span><?php include_once('footer.php'); ?></span><br>
+        <span><?php include_once('footer.php'); ?></span>
     </body>
 </html>

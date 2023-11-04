@@ -37,6 +37,10 @@ main {
     transition: background-color 0.5s ease;
 }
 
+h1 {
+    padding-top: 1em;
+}
+
 body {
     background: var(--background-color);
     color: var(--text-color);

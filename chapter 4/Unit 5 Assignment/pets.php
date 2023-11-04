@@ -2,12 +2,12 @@
     //connection info for database
     $host = "sql1.njit.edu";
     $username = "grg";
-    $password = "**************";
+    $password = "3bm3bmchtr-NJIT";
     $dbname = "mysql:host=$host;dbname=$username";
 
-    // $host = "localhost:3306"; //use :3307 if XAMPP SQL (MariaDB) server instead
+    // $host = "127.0.0.1:3306"; //use :3307 if XAMPP SQL (MariaDB) server instead
     // $username = "root";
-    // $password = '*************';
+    // $password = '3bm3bmchtrMS';
     // $name = "it202";
     // $dbname = "mysql:host=$host;dbname=$name";
 
@@ -50,8 +50,11 @@
 
 
         <!-- linked and local styling -->
+        <link rel = 'icon' href = "images\wild-lines-2-behance-solos-cat-1-6380ceff5ce94-png__700-modified-removebg-preview.png" type = "image/x-icon" media="(prefers-color-scheme:no-preference)">
+        <link rel = 'icon' href = "images\wild-lines-2-behance-solos-cat-1-6380ceff5ce94-png__700-removebg-preview.png" type = "image/x-icon" media="(prefers-color-scheme:dark)">
+        <link rel = 'icon' href = "images\wild-lines-2-behance-solos-cat-1-6380ceff5ce94-png__700-modified-removebg-preview.png" type = "image/x-icon" media="(prefers-color-scheme:light)">
         <link rel = 'stylesheet' href = 'style.css'>
-
+        
         <style>
             .dataTable {
                 border: 1px solid black;
