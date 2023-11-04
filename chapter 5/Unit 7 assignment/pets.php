@@ -57,29 +57,7 @@
         <link rel = 'icon' href = "images\wild-lines-2-behance-solos-cat-1-6380ceff5ce94-png__700-modified-removebg-preview.png" type = "image/x-icon" media="(prefers-color-scheme:no-preference)">
         <link rel = 'icon' href = "images\wild-lines-2-behance-solos-cat-1-6380ceff5ce94-png__700-removebg-preview.png" type = "image/x-icon" media="(prefers-color-scheme:dark)">
         <link rel = 'icon' href = "images\wild-lines-2-behance-solos-cat-1-6380ceff5ce94-png__700-modified-removebg-preview.png" type = "image/x-icon" media="(prefers-color-scheme:light)">
-        
-        <!-- local styling for HTML tables -->
-        <style>
-            .dataTable {
-                border: 1px solid black;
-                border-collapse: collapse;
-                padding: 10px;
-                width: 100%;
-            }
-
-            .dataTable th {
-                text-align: center;
-                border: 1px solid black;
-                padding: 10px;
-            }
-
-            .dataTable td {
-                text-align: center;
-                border: 1px solid black;
-                padding: 10px;
-            }
-        </style>
-        
+                
     </head>
     <body>
         <!-- including the header -->

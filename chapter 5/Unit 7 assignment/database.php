@@ -1,7 +1,7 @@
 <!-- a php file which can be included to get access to the connected SQL database -->
 <?php
     $host = "sql1.njit.edu";
-    $username = "gr";
+    $username = "grg";
     $password = "3bm3bmchtr-NJIT";
     $dbname = "mysql:host=$host;dbname=$username";
     
