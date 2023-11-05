@@ -19,7 +19,7 @@
         
         <main>
             <div class="row" style="padding-top:1em">
-                <div class="column" style="opacity:80%">
+                <div class="column">
                     <h1 style="text-align:center; padding-top:0em" id="description">Family owned for over 30 years!</h1>
                     <figure>
                         <img src="images\pet_store-header_v3.jpg" alt="pet store" class="headerIMG" >
