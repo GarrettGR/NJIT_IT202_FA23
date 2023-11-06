@@ -1,6 +1,6 @@
 <?php
     //including the database file to get access to the database
-    include('database.php');
+    require_once('database.php');
 
     //query statement to get all data from the bread table and join it with the breadCategories table
     $statement = $db->query("SELECT breadCategoryName, breadCode, breadName, description, price FROM breadCategories INNER JOIN bread ON breadCategories.breadCategoryID = bread.breadCategoryID");
