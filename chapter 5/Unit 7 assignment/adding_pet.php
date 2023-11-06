@@ -9,10 +9,11 @@
     $description = filter_input(INPUT_POST, 'animal_description', FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_FLAG_NO_ENCODE_QUOTES);
     $price = filter_input(INPUT_POST, 'animal_price', FILTER_VALIDATE_FLOAT);
 
-    $codes = filter_input(INPUT_POST, 'codes');
+    //getting the codes from the hidden input
+    $codes = unserialize($_POST['codes']);
 
     //validating the data
-    $error_message = [0,'this is going to be a message, an error message'];
+    $error_message = [0,""];
     $max_Price = 999.99;
 
     if (empty($animal_type)) {
@@ -39,7 +40,7 @@
     }
 
     //if an error message exists, go to the add_pet.php page
-    if (!empty($error_message)) {
+    if (!empty($error_message[1])) {
         include('add_pet.php');
         exit();
     }
@@ -58,12 +59,9 @@
 
     $animal_type = explode('-', $result['breadCode']);
     $breadCode = $animal_type[0] . '-' . str_pad(($animal_type[1] + 1), 3, '0', STR_PAD_LEFT);
-    die(var_dump($breadCategoryID, $breadCode, $breadName, $description, $price, $animal_type));
 
     // query statement to insert the data into the database
     $statement = $db->query("INSERT INTO bread (breadCategoryID, breadCode, breadName, description, price, dateAdded) VALUES ('$breadCategoryID', '$breadCode', '$breadName', '$description', '$price', NOW())");
-    $statement->execute();
-    $statement->closeCursor();
 
     echo '<script> alert("Go to \'Pets\' page to see your rescue added to our database") </script>';
 

@@ -9,7 +9,7 @@
     try {
         //connecting to the database
         $db = new PDO($dbname, $username, $password);
-        echo '<script> alert("Connected successfully") </script>';
+        // echo '<script> alert("Connected successfully") </script>';
     } catch (PDOException $e) {
         //displaying an error message if the connection fails
         $error_message = $e->getMessage();

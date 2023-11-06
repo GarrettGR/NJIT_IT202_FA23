@@ -1,9 +1,28 @@
 <!-- a page to insert a new animal into the pet store SQL page; provides the ability to 'bring a rescue' to the pet store -->
+
 <?php
+    $get_codes = function(){
+        global $db;
+        global $result;
+        global $codes;
+
+        $query = 'SELECT breadCategories.breadCategoryID, breadCategories.breadCategoryName, MIN(bread.breadCode) FROM bread INNER JOIN breadCategories ON bread.breadCategoryID = breadCategories.breadCategoryID GROUP BY breadCategories.breadCategoryID ORDER BY breadCategories.breadCategoryID ASC';
+        $statement = $db->prepare($query);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        $statement->closeCursor();
+
+        $codes = [];
+        foreach ($result as $row) {
+            $codes[$row['breadCategoryID']] = substr($row['MIN(bread.breadCode)'], 0, -3) . '%';
+        }
+    };
+
     //including the database connection file
     require_once('database.php');
 
     //seeting default values for the variables
+    if (!isset($error_message)) { $error_message = [0,""]; }
     if (!isset($breadCategoryID)) { $breadCategoryID = ''; }
     if (!isset($breadCode)) { $breadCode = ''; }
     if (!isset($breadName)) { $breadName = ''; }
@@ -11,21 +30,94 @@
     if (!isset($price)) { $price = ''; }
 
     if(!isset($animal_type)) { $animal_type = 0; }
-    if(!isset($codes)) { $codes = []; }
 
     // $query = 'SELECT DISTINCT breadCategoryID, breadCode FROM bread WHERE breadCode LIKE "%-001" ORDER BY breadCategoryID ASC';
     // $query = 'SELECT breadCategoryID, MIN(breadCode) FROM bread GROUP BY breadCategoryID ORDER BY breadCategoryID ASC';
 
-    $query = 'SELECT breadCategories.breadCategoryID, breadCategories.breadCategoryName, MIN(bread.breadCode) FROM bread INNER JOIN breadCategories ON bread.breadCategoryID = breadCategories.breadCategoryID GROUP BY breadCategories.breadCategoryID ORDER BY breadCategories.breadCategoryID ASC';
-    $statement = $db->prepare($query);
-    $statement->execute();
-    $result = $statement->fetchAll();
-    $statement->closeCursor();
+    // function getCodes(){
+    //     global $db;
+    //     global $result;
+    //     global $codes;
 
-    foreach ($result as $row) {
-        $codes[$row['breadCategoryID']] = substr($row['MIN(bread.breadCode)'], 0, -3) . '%';
+    //     $query = 'SELECT breadCategories.breadCategoryID, breadCategories.breadCategoryName, MIN(bread.breadCode) FROM bread INNER JOIN breadCategories ON bread.breadCategoryID = breadCategories.breadCategoryID GROUP BY breadCategories.breadCategoryID ORDER BY breadCategories.breadCategoryID ASC';
+    //     $statement = $db->prepare($query);
+    //     $statement->execute();
+    //     $result = $statement->fetchAll();
+    //     $statement->closeCursor();
+
+    //     $codes = [];
+    //     foreach ($result as $row) {
+    //         $codes[$row['breadCategoryID']] = substr($row['MIN(bread.breadCode)'], 0, -3) . '%';
+    //     }
+    // }
+
+    if (isset($_POST['formSubmit'])){
+        //getting the data from the form
+        $animal_type = filter_input(INPUT_POST, 'animal_type', FILTER_VALIDATE_INT);
+        $breadName = filter_input(INPUT_POST, 'animal_name', FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_FLAG_NO_ENCODE_QUOTES); //FILTER_SANITIZE_STRING has been deprecated (?) so I used this instead (found on StackOverflow)
+        $description = filter_input(INPUT_POST, 'animal_description', FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_FLAG_NO_ENCODE_QUOTES);
+        $price = filter_input(INPUT_POST, 'animal_price', FILTER_VALIDATE_FLOAT);
+
+        //getting the codes from the hidden input
+        $codes = unserialize($_POST['codes']);
+
+        //validating the data
+        $error_message = [0,""];
+        $max_Price = 999.99;
+
+        if (empty($animal_type)) {
+            $error_message[0] = 1;
+            $error_message[1] = 'Please select an animal type';
+        } else if (empty($breadName)) {
+            $error_message[0] = 2;
+            $error_message[1] = 'Please enter an animal name';
+        } else if (empty($description)) {
+            $error_message[0] = 3;
+            $error_message[1] = 'Please enter an animal description';
+        } else if (empty($price)) {
+            $error_message[0] = 4;
+            $error_message[1] = 'Please enter an animal price';
+        } else if (!is_numeric($price)) {
+            $error_message[0] = 4;
+            $error_message[1] = 'Please enter a valid price';
+        } else if ($price < 0) {
+            $error_message[0] = 4;
+            $error_message[1] = 'Please enter a positive price';
+        } else if ($price > $max_Price) {
+            $error_message[0] = 4;
+            $error_message[1] = 'Please enter a price less than $' . $max_Price;
+        }
+
+        //if an error message exists, go to the add_pet.php page
+        if (!empty($error_message[1])) {
+            unset($_POST['formSubmit']);
+            include('add_pet.php');
+            exit();
+        }
+
+        //setting the category ID and code based on the animal type
+        $breadCategoryID = $animal_type;
+
+        $animal_type = $codes[$animal_type];
+
+        $query = 'SELECT breadCode FROM bread WHERE breadCode LIKE :animal_code ORDER BY breadCode DESC LIMIT 1';
+        $statement = $db->prepare($query);
+        $statement->bindValue(':animal_code', $animal_type);
+        $statement->execute();
+        $result = $statement->fetch();
+        $statement->closeCursor();
+
+        $animal_type = explode('-', $result['breadCode']);
+        $breadCode = $animal_type[0] . '-' . str_pad(($animal_type[1] + 1), 3, '0', STR_PAD_LEFT);
+
+        // query statement to insert the data into the database
+        $statement = $db->query("INSERT INTO bread (breadCategoryID, breadCode, breadName, description, price, dateAdded) VALUES ('$breadCategoryID', '$breadCode', '$breadName', '$description', '$price', NOW())");
+
+        echo '<script> alert("Go to \"Pets\" page to see your rescue added to our database") </script>';
+
+        //unset the form submit variable to prevent automatic resubmission (loop)
+        unset($_POST['formSubmit']);
     }
-
 ?>
 
 <!DOCTYPE html>
@@ -51,7 +143,7 @@
     <body>
 
         <!-- including the header -->
-        <span><?php $page = 'add_pet'; include_once('header.php'); ?></span>
+        <span><?php $page = 'rescue'; include_once('header.php'); ?></span>
 
         <main>
 
@@ -64,11 +156,14 @@
             <?php } ?>
 
             <!-- form to add a new animal to the database -->
-            <form action="adding_pet.php" method="post"> <!-- action="<_?php echo htmlentities($_SERVER['PHP_SELF']); ?>" -->
+            <form action="add_pet.php" method="post"> <!-- action="adding_pet.php" -->
                 <div id="data">
 
+                    <!-- call the php function to get the codes used to fill in the dropdown & for bread-type assignments -->
+                    <?php $get_codes(); ?>
+
                     <!-- hidden 'input' to pass the $codes variable through the $_POST array -->
-                    <input type="hidden" name="codes" value="<?php $codes ?>">
+                    <input type="hidden" name="codes" value='<?php echo serialize($codes) ?>' >
 
                     <!-- creates a selection dynamically as a result of whatever is in the SQL database -->
                     <?php if ($_SERVER['REQUEST_METHOD'] == "POST" && ($animal_type == 0 || $error_message[0]==1)) { ?>
@@ -76,7 +171,7 @@
                     <?php } else { ?>
                         <label for="animal_type">Animal Type:</label>
                     <?php } ?>
-                    <select name="animal_type" id="animal_type" value="<?php echo htmlspecialchars($breadCategoryID) ?>">
+                    <select name="animal_type" id="animal_type" value=<?php echo htmlspecialchars($breadCategoryID) ?>>
                         <option value="0">--SELECT--</option>
                         <!-- <option value="1">Bird</option>
                         <option value="2">Cat</option>

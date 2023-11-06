@@ -54,3 +54,27 @@ UPDATE bread
 SET price = ROUND(RAND() * 100, 2);
 
 UPDATE bread SET breadName = 'Sunshine' WHERE breadCode = 'BRD-003'
+
+-- test queries
+
+SELECT DISTINCT breadCategories.breadCategoryID, breadCategories.breadCategoryName, bread.breadCode FROM breadCategories INNER JOIN bread ON breadCategories.breadCategoryID = bread.breadCategoryID WHERE bread.breadCategoryID=2 ORDER BY bread.breadCode DESC LIMIT 1;
+
+SELECT DISTINCT breadCategoryID, breadCode FROM bread WHERE breadCode LIKE "%-001" ORDER BY breadCategoryID ASC;
+
+SELECT breadCategoryID, MIN(breadCode) FROM bread GROUP BY breadCategoryID;
+
+SELECT * FROM breadCategories INNER JOIN bread ON breadCategories.breadCategoryID = bread.breadCategoryID GROUP BY bread.breadID;
+
+SELECT breadCategories.breadCategoryID, breadCategories.breadCategoryName, MIN(bread.breadCode) FROM bread INNER JOIN breadCategories ON bread.breadCategoryID = breadCategories.breadCategoryID GROUP BY breadCategories.breadCategoryID ORDER BY breadCategories.breadCategoryID ASC;
+
+SELECT breadCategories.breadCategoryID, bread.breadCode FROM breadCategories INNER JOIN bread ON breadCategories.breadCategoryID = bread.breadCategoryID GROUP BY breadCategories.breadCategoryID;
+
+SELECT breadCategories.breadCategoryID, breadCategories.breadCategoryName, bread.breadCode FROM breadCategories INNER JOIN bread ON breadCategories.breadCategoryID = bread.breadCategoryID ORDER BY breadCategories.breadCategoryID ASC;
+
+SELECT breadCode FROM bread WHERE breadCode LIKE "BRD-%" ORDER BY breadCode DESC;
+
+SELECT * FROM bread;
+
+SELECT * FROM breadCategories;
+
+DELETE FROM bread WHERE breadCode LIKE "%004";
