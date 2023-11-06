@@ -1,12 +1,11 @@
 <!-- a page to insert a new animal into the pet store SQL page; provides the ability to 'bring a rescue' to the pet store -->
-
 <?php
     $get_codes = function(){
         global $db;
         global $result;
         global $codes;
 
-        $query = 'SELECT breadCategories.breadCategoryID, breadCategories.breadCategoryName, MIN(bread.breadCode) FROM bread INNER JOIN breadCategories ON bread.breadCategoryID = breadCategories.breadCategoryID GROUP BY breadCategories.breadCategoryID ORDER BY breadCategories.breadCategoryID ASC';
+        $query = 'SELECT breadCategories.breadCategoryID, breadCategories.breadCategoryName, MIN(bread.breadCode) FROM bread RIGHT JOIN breadCategories ON bread.breadCategoryID = breadCategories.breadCategoryID GROUP BY breadCategories.breadCategoryID ORDER BY breadCategories.breadCategoryID ASC';
         $statement = $db->prepare($query);
         $statement->execute();
         $result = $statement->fetchAll();
@@ -22,40 +21,26 @@
     require_once('database.php');
 
     //seeting default values for the variables
-    if (!isset($error_message)) { $error_message = [0,""]; }
     if (!isset($breadCategoryID)) { $breadCategoryID = ''; }
     if (!isset($breadCode)) { $breadCode = ''; }
     if (!isset($breadName)) { $breadName = ''; }
     if (!isset($description)) { $description = ''; }
     if (!isset($price)) { $price = ''; }
+    if (!isset($animal_type)) { $animal_type = 0; }
+    if (!isset($error_message)) { $error_message = [0,""]; }
+    if (!isset($codes)) { $codes = []; }
+    if (!isset($result)) { $result = []; }
 
-    if(!isset($animal_type)) { $animal_type = 0; }
 
     // $query = 'SELECT DISTINCT breadCategoryID, breadCode FROM bread WHERE breadCode LIKE "%-001" ORDER BY breadCategoryID ASC';
     // $query = 'SELECT breadCategoryID, MIN(breadCode) FROM bread GROUP BY breadCategoryID ORDER BY breadCategoryID ASC';
-
-    // function getCodes(){
-    //     global $db;
-    //     global $result;
-    //     global $codes;
-
-    //     $query = 'SELECT breadCategories.breadCategoryID, breadCategories.breadCategoryName, MIN(bread.breadCode) FROM bread INNER JOIN breadCategories ON bread.breadCategoryID = breadCategories.breadCategoryID GROUP BY breadCategories.breadCategoryID ORDER BY breadCategories.breadCategoryID ASC';
-    //     $statement = $db->prepare($query);
-    //     $statement->execute();
-    //     $result = $statement->fetchAll();
-    //     $statement->closeCursor();
-
-    //     $codes = [];
-    //     foreach ($result as $row) {
-    //         $codes[$row['breadCategoryID']] = substr($row['MIN(bread.breadCode)'], 0, -3) . '%';
-    //     }
-    // }
 
     if (isset($_POST['formSubmit'])){
         //getting the data from the form
         $animal_type = filter_input(INPUT_POST, 'animal_type', FILTER_VALIDATE_INT);
         $breadName = filter_input(INPUT_POST, 'animal_name', FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_FLAG_NO_ENCODE_QUOTES); //FILTER_SANITIZE_STRING has been deprecated (?) so I used this instead (found on StackOverflow)
         $description = filter_input(INPUT_POST, 'animal_description', FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_FLAG_NO_ENCODE_QUOTES);
+        $breadCode = filter_input(INPUT_POST, 'animal_code', FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_FLAG_NO_ENCODE_QUOTES);
         $price = filter_input(INPUT_POST, 'animal_price', FILTER_VALIDATE_FLOAT);
 
         //getting the codes from the hidden input
@@ -65,7 +50,7 @@
         $error_message = [0,""];
         $max_Price = 999.99;
 
-        if (empty($animal_type)) {
+        if ($animal_type == 0) {
             $error_message[0] = 1;
             $error_message[1] = 'Please select an animal type';
         } else if (empty($breadName)) {
@@ -95,20 +80,55 @@
             exit();
         }
 
-        //setting the category ID and code based on the animal type
-        $breadCategoryID = $animal_type;
+        if ($codes[$animal_type] == '%'){
+            $breadCategoryID = $animal_type;
 
-        $animal_type = $codes[$animal_type];
+            $existing_codes = array_values($codes);
+            foreach ($existing_codes as $key => $value) {
+                if ($value!='%'){
+                    $existing_codes[$key] = substr($value, 0, -2);
+                }
+            }
 
-        $query = 'SELECT breadCode FROM bread WHERE breadCode LIKE :animal_code ORDER BY breadCode DESC LIMIT 1';
-        $statement = $db->prepare($query);
-        $statement->bindValue(':animal_code', $animal_type);
-        $statement->execute();
-        $result = $statement->fetch();
-        $statement->closeCursor();
+            if ($breadCode == ''){
+                $error_message[0] = 5;
+                $error_message[1] = 'this is the first time we\'ve seen this animal type, enter its 3-letter code manually'; 
+            } else if (!is_string($breadCode)){
+                $error_message[0] = 5;
+                $error_message[1] = 'Please enter a valid 3-letter animal code';
+            } else if (strlen($breadCode) != 3){
+                $error_message[0] = 5;
+                $error_message[1] = 'Please enter a valid 3-letter animal code';
+            }else if (array_search($breadCode, $existing_codes) !== false){
+                $error_message[0] = 5;
+                $error_message[1] = 'Please enter a unique 3-letter animal code';
+            }
+    
+            //if an error message exists, go to the add_pet.php page
+            if (!empty($error_message[1])) {
+                unset($_POST['formSubmit']);
+                include('add_pet.php');
+                exit();
+            }
 
-        $animal_type = explode('-', $result['breadCode']);
-        $breadCode = $animal_type[0] . '-' . str_pad(($animal_type[1] + 1), 3, '0', STR_PAD_LEFT);
+            $breadCode = $breadCode . '-001';
+
+        } else {
+            //setting the category ID and code based on the animal type
+            $breadCategoryID = $animal_type;
+
+            $animal_type = $codes[$animal_type];
+
+            $query = 'SELECT breadCode FROM bread WHERE breadCode LIKE :animal_code ORDER BY breadCode DESC LIMIT 1';
+            $statement = $db->prepare($query);
+            $statement->bindValue(':animal_code', $animal_type);
+            $statement->execute();
+            $result = $statement->fetch();
+            $statement->closeCursor();
+
+            $animal_type = explode('-', $result['breadCode']);
+            $breadCode = $animal_type[0] . '-' . str_pad(($animal_type[1] + 1), 3, '0', STR_PAD_LEFT);
+        }
 
         // query statement to insert the data into the database
         $statement = $db->query("INSERT INTO bread (breadCategoryID, breadCode, breadName, description, price, dateAdded) VALUES ('$breadCategoryID', '$breadCode', '$breadName', '$description', '$price', NOW())");
@@ -166,22 +186,33 @@
                     <input type="hidden" name="codes" value='<?php echo serialize($codes) ?>' >
 
                     <!-- creates a selection dynamically as a result of whatever is in the SQL database -->
-                    <?php if ($_SERVER['REQUEST_METHOD'] == "POST" && ($animal_type == 0 || $error_message[0]==1)) { ?>
+                    <?php if ($_SERVER['REQUEST_METHOD'] == "POST" && ($animal_type == 0 || $error_message[0]==1) && ($error_message[0]!=5 || $error_message[0]!=6)) { ?>
                         <label style="color: red" for="animal_type">Animal Type:</label>
-                    <?php } else { ?>
+                    <?php } else if ($error_message[0]!=5 || $error_message[0]!=6) { ?>
                         <label for="animal_type">Animal Type:</label>
                     <?php } ?>
-                    <select name="animal_type" id="animal_type" value=<?php echo htmlspecialchars($breadCategoryID) ?>>
-                        <option value="0">--SELECT--</option>
-                        <!-- <option value="1">Bird</option>
-                        <option value="2">Cat</option>
-                        <option value="3">Dog</option>
-                        <option value="4">Snake</option>
-                        <option value="5">Fish</option> -->
-                        <?php foreach ($result as $row) { ?>
-                            <option value="<?php echo $row['breadCategoryID']; ?>"><?php echo $row['breadCategoryName']; ?></option>
-                        <?php } ?>
-                    </select><br>
+                    <?php if ($error_message[0]!=5 || $error_message[0]!=6){ ?>
+                            <select name="animal_type" id="animal_type" value=<?php echo htmlspecialchars($breadCategoryID) ?>>
+                            <option value="0">--SELECT--</option>
+                            <!-- <option value="1">Bird</option>
+                            <option value="2">Cat</option>
+                            <option value="3">Dog</option>
+                            <option value="4">Snake</option>
+                            <option value="5">Fish</option> -->
+                            <?php foreach ($result as $row) { ?>
+                                <option value="<?php echo $row['breadCategoryID']; ?>"><?php echo $row['breadCategoryName']; ?></option>
+                            <?php } ?>
+                        </select><br>
+                    <?php }?>
+
+                    <?php if ($_SERVER['REQUEST_METHOD'] == "POST" && $error_message[0]==5) { ?>
+                        <label style="color: red" for="animal_code">Animal Code:</label>
+                    <?php } else if ($_SERVER['REQUEST_METHOD'] == "POST" && $error_message[0]==6){ ?>
+                        <label for="animal_code">Animal Code:</label>
+                    <?php } ?>
+                    <?php if ($_SERVER['REQUEST_METHOD'] == "POST" && ($error_message[0]==5 || $error_message[0]==6)){ ?>
+                        <input type="text" name="animal_code" id="animal_code" value="<?php echo htmlspecialchars($breadCode); ?>"><br>
+                    <?php } ?>
 
                     <!-- traditional input form feilds -- with the exception of the error-reactive coloring -->
                     <?php if ($_SERVER['REQUEST_METHOD'] == "POST" && (empty($breadName) || $error_message[0]==2)) { ?>
@@ -207,7 +238,7 @@
             
                     <!-- a reset/clear button -->
                     <br><label for="reset">&nbsp;</label>
-                    <input type="reset" name="reset" id="reset" value="Clear"><br>
+                    <input type="reset" name="reset" id="reset" value="Clear" on-click="<?php unset($error_message) ?>"><br>
 
                     <!-- a submit button -->
                     <br><label for="formSubmit">&nbsp;</label>
