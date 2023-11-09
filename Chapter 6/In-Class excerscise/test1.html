@@ -1,0 +1,64 @@
+<html>
+    <body>
+        <span> <b>Welcome</b> <u>back</u> <i>Sam</i> </span>
+        <script>
+            const spanElement = document.querySelector('span');
+            console.log("span=" + spanElement);
+            console.log("span=" + spanElement.innerHTML);
+
+            const boldElement = document.querySelector('b');
+            console.log("bold=" + boldElement);
+            console.log("bold=" + boldElement.innerHTML);
+
+            const boldElementText = spanElement.firstChild;
+            console.log("bold text=" + boldElementText);
+            console.log(boldElementText);
+
+            const underlinedElement = spanElement.firstChild.nextElementSibling;
+            console.log("underlined=" + underlinedElement);
+            console.log("underlined=" + underlinedElement.innerHTML);
+            console.log("underlined value=" + underlinedElement.nodeValue);
+            console.log("underlined text=" + underlinedElement.textContent);
+
+            const italicElement = document.querySelector('i');
+            console.log("italic=" + italicElement);
+            console.log("italic=" + italicElement.innerHTML);
+            console.log("italic value=" + italicElement.nodeValue);
+            console.log("italic text=" + italicElement.textContent);
+
+            const italicElement2 = spanElement.lastChild;
+            console.log("italic=" + italicElement2);
+            console.log(italicElement2);
+            console.log("italic text=" + italicElement2.innerHTML);
+
+            const spanText = spanElement.textContent;
+            console.log("span text=" + spanText);
+
+            const span2 = document.querySelector('span');
+            console.log("span2=" + span2);
+            console.log(span2);
+            // console.log(span2.firstChild);
+            console.log(span2.firstElementChild);
+            console.log(span2.firstElementChild.nextElementSibling);
+            console.log(span2.lastElementChild);
+
+            spanElement.textContent = "Javascript / Jquery examples";
+            console.log(spanElement.textContent);
+            console.log(spanElement)
+
+            spanElement2 = document.querySelector('span');
+
+            spanElement2.childNodes[0].textContent = "Javascript / Jquery examples";
+            console.log(spanElement2.childNodes[0].textContent);
+            console.log(spanElement2)
+
+            //adds a new child node to spanElement
+            spanElement2.appendChild(document.createTextNode("test?"));
+            console.log(spanElement2.childNodes[1].nodeValue);
+            console.log(spanElement2)
+
+
+
+        </script>
+    </body>
+</html>

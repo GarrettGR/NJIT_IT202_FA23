@@ -1,0 +1,36 @@
+<html>
+    <main>
+        <h2 onclick="disco()">Welcome to our website</h2>
+    </main>
+
+    <style>
+        .blue {
+            color: blue;
+        }
+        .red {
+            color: red;
+        }
+    </style>
+
+    <script>
+        const heading2 = document.querySelector('h2');
+        heading2.classList.add('blue');
+        console.log(heading2.classList);
+
+        heading2.classList.replace('blue', 'red');
+        console.log(heading2.classList);
+
+        heading2.classList.remove('red');
+        console.log(heading2.classList);
+
+        function disco(){
+            if(heading2.classList.contains('blue')){
+                heading2.classList.replace('blue', 'red');
+            } else if (heading2.classList.contains('red')) {
+                heading2.classList.replace('red', 'blue');
+            } else {
+                heading2.classList.add('blue');
+            }
+        }
+    </script>
+</html>

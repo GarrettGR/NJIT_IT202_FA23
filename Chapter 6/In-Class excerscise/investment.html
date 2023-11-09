@@ -1,0 +1,40 @@
+<html>
+    <body>
+        <form>
+            <label for="investmentAmount">Investment Amount:</label>
+            <input type="text" id="investmentAmount" name="investmentAmount"><br>
+
+            <label for="interestRate">Annual Interest Rate:</label>
+            <input type="text" id="interestRate" name="interestRate" value="6.5%"><br>
+
+            <label for="numOfYears">Number of Years:</label>
+            <input type="text" id="numOfYears" name="numOfYears"><br>
+
+            <input type="submit" value="Calculate" id="calculate" name="calculate"><br>
+        </form>
+    </body>
+    <script>
+        const investmentChange = () => {
+            const investmentElement = document.querySelector('#investmentAmount');
+            const investmentAmount = investmentElement.value;
+            console.log("change");
+        }
+        const yearsDoubleClick = () => {
+            const yearsElement = document.querySelector('#numOfYears');
+            const years = yearsElement.value;
+            console.log("double click");
+        }
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            () => {
+                document.querySelector('#interestRate').disabled = true;
+                document.querySelector('#numOfYears').focus() = true;
+                document.querySelector('#investmentAmount').addEventListener('change', investmentChange);
+                document.querySelector('#numOfYears').addEventListener('dblclick', yearsDoubleClick);
+            }
+        );
+        //! FIX THIS, DOESN'T WORK
+        
+    </script>
+</html>
