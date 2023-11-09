@@ -1,3 +1,5 @@
+<!--! NOTE THIS FILE IS DEPRECATED -- ITS FUNCTIONS ARE NOW HANDLED IN "add_pet.php" -->
+
 <?php
 
     //connecting to the database

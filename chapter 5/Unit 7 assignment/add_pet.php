@@ -42,6 +42,13 @@
         $description = filter_input(INPUT_POST, 'animal_description', FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_FLAG_NO_ENCODE_QUOTES);
         $breadCode = filter_input(INPUT_POST, 'animal_code', FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_FLAG_NO_ENCODE_QUOTES);
         $price = filter_input(INPUT_POST, 'animal_price', FILTER_VALIDATE_FLOAT);
+        $animalCode = filter_input(INPUT_POST, 'manual_code', FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_FLAG_NO_ENCODE_QUOTES);
+
+        if(!empty($animalCode)){
+            $manual = true;
+        } else {
+            $manual = false;
+        }
 
         //getting the codes from the hidden input
         $codes = unserialize($_POST['codes']);
@@ -80,54 +87,86 @@
             exit();
         }
 
-        if ($codes[$animal_type] == '%'){
-            $breadCategoryID = $animal_type;
-
-            $existing_codes = array_values($codes);
-            foreach ($existing_codes as $key => $value) {
-                if ($value!='%'){
-                    $existing_codes[$key] = substr($value, 0, -2);
-                }
-            }
-
-            if ($breadCode == ''){
-                $error_message[0] = 5;
-                $error_message[1] = 'this is the first time we\'ve seen this animal type, enter its 3-letter code manually'; 
-            } else if (!is_string($breadCode)){
-                $error_message[0] = 5;
-                $error_message[1] = 'Please enter a valid 3-letter animal code';
-            } else if (strlen($breadCode) != 3){
-                $error_message[0] = 5;
-                $error_message[1] = 'Please enter a valid 3-letter animal code';
-            }else if (array_search($breadCode, $existing_codes) !== false){
-                $error_message[0] = 5;
-                $error_message[1] = 'Please enter a unique 3-letter animal code';
-            }
-    
-            //if an error message exists, go to the add_pet.php page
-            if (!empty($error_message[1])) {
-                unset($_POST['formSubmit']);
-                include('add_pet.php');
-                exit();
-            }
-
-            $breadCode = $breadCode . '-001';
-
-        } else {
-            //setting the category ID and code based on the animal type
-            $breadCategoryID = $animal_type;
-
-            $animal_type = $codes[$animal_type];
-
-            $query = 'SELECT breadCode FROM bread WHERE breadCode LIKE :animal_code ORDER BY breadCode DESC LIMIT 1';
+        if ($manual){
+            $query = 'SELECT breadCode FROM bread';
             $statement = $db->prepare($query);
-            $statement->bindValue(':animal_code', $animal_type);
             $statement->execute();
-            $result = $statement->fetch();
+            $result = $statement->fetchAll();
             $statement->closeCursor();
 
-            $animal_type = explode('-', $result['breadCode']);
-            $breadCode = $animal_type[0] . '-' . str_pad(($animal_type[1] + 1), 3, '0', STR_PAD_LEFT);
+            $existing_codes = array_values($result);
+
+            $breadCategoryID = $animal_type;
+            $breadCode = $animalCode;
+            if(!is_string($breadCode)){
+                $error_message[0] = 7;
+                $error_message[1] = 'Please enter a valid 3-letter/3-digit animal code, seperated by a hyphen';
+            } else if (strlen($breadCode) != 7){
+                $error_message[0] = 7;
+                $error_message[1] = 'Please enter a valid 3-letter/3-digit animal code, seperated by a hyphen';
+            } else if (substr($breadCode, -4, -3) != '-'){
+                $error_message[0] = 7;
+                $error_message[1] = 'Please enter a valid 3-letter/3-digit animal code, serperated by a hyphen';
+            } else if (!is_numeric((int)(substr($breadCode, -3)))){
+                $error_message[0] = 7;
+                $error_message[1] = 'Please enter a valid 3-letter/3-digit animal code, seperated by a hyphen';
+            } else if (!is_string(substr($breadCode, 0, 3))){
+                $error_message[0] = 7;
+                $error_message[1] = 'Please enter a valid 3-letter/3-digit animal code, seperated by a hyphen';
+            } else if (array_search($breadCode, $existing_codes) !== false){
+                $error_message[0] = 6;
+                $error_message[1] = 'Please enter a unique 3-letter/3-digit animal code, seperated by a hyphen';
+            }
+        } else {
+            if ($codes[$animal_type] == '%'){
+                $breadCategoryID = $animal_type;
+
+                $existing_codes = array_values($codes);
+                foreach ($existing_codes as $key => $value) {
+                    if ($value!='%'){
+                        $existing_codes[$key] = substr($value, 0, -2);
+                    }
+                }
+
+                if ($breadCode == ''){
+                    $error_message[0] = 5;
+                    $error_message[1] = 'this is the first time we\'ve seen this animal type, enter its 3-letter code manually'; 
+                } else if (!is_string($breadCode)){
+                    $error_message[0] = 5;
+                    $error_message[1] = 'Please enter a valid 3-letter animal code';
+                } else if (strlen($breadCode) != 3){
+                    $error_message[0] = 5;
+                    $error_message[1] = 'Please enter a valid 3-letter animal code';
+                }else if (array_search($breadCode, $existing_codes) !== false){
+                    $error_message[0] = 5;
+                    $error_message[1] = 'Please enter a unique 3-letter animal code';
+                }
+        
+                //if an error message exists, go to the add_pet.php page
+                if (!empty($error_message[1])) {
+                    unset($_POST['formSubmit']);
+                    include('add_pet.php');
+                    exit();
+                }
+
+                $breadCode = $breadCode . '-001';
+
+            } else {
+                //setting the category ID and code based on the animal type
+                $breadCategoryID = $animal_type;
+
+                $animal_type = $codes[$animal_type];
+
+                $query = 'SELECT breadCode FROM bread WHERE breadCode LIKE :animal_code ORDER BY breadCode DESC LIMIT 1';
+                $statement = $db->prepare($query);
+                $statement->bindValue(':animal_code', $animal_type);
+                $statement->execute();
+                $result = $statement->fetch();
+                $statement->closeCursor();
+
+                $animal_type = explode('-', $result['breadCode']);
+                $breadCode = $animal_type[0] . '-' . str_pad(($animal_type[1] + 1), 3, '0', STR_PAD_LEFT);
+            }
         }
 
         // query statement to insert the data into the database
@@ -158,6 +197,54 @@
         <link rel = 'icon' href = "images\wild-lines-2-behance-solos-cat-1-6380ceff5ce94-png__700-modified-removebg-preview.png" type = "image/x-icon" media="(prefers-color-scheme:no-preference)">
         <link rel = 'icon' href = "images\wild-lines-2-behance-solos-cat-1-6380ceff5ce94-png__700-removebg-preview.png" type = "image/x-icon" media="(prefers-color-scheme:dark)">
         <link rel = 'icon' href = "images\wild-lines-2-behance-solos-cat-1-6380ceff5ce94-png__700-modified-removebg-preview.png" type = "image/x-icon" media="(prefers-color-scheme:light)">
+
+        <script>    
+            function toggleVis() {
+                var x = document.getElementById("manual_entry");
+                if (x.style.display === "none") {
+                    x.style.display = "inline";
+                } else {
+                    x.style.display = "none";
+                }        
+            }
+        </script>
+
+        <style>
+            .tooltip {
+                position: relative;
+                display: inline-block;
+                border-bottom: 1px dotted black;
+            }
+
+            .tooltip .tooltiptext {
+                visibility: hidden;
+                width: 220px;
+                background-color: black;
+                color: #fff;
+                text-align: center;
+                border-radius: 6px;
+                padding: 5px 0;
+                position: absolute;
+                z-index: 1;
+                top: -5px;
+                left: 110%;
+            }
+
+            .tooltip .tooltiptext::after {
+                content: "";
+                position: absolute;
+                top: 50%;
+                right: 100%;
+                margin-top: -5px;
+                border-width: 5px;
+                border-style: solid;
+                border-color: transparent black transparent transparent;
+            }
+            .tooltip:hover .tooltiptext {
+                visibility: visible;
+            }
+        </style>
+            
     </head>
 
     <body>
@@ -205,13 +292,14 @@
                         </select><br>
                     <?php }?>
 
+                    <!-- allows breadCode to be set manually in the case that there is a breadCategoryID that does not have an entry in "bread" -->
                     <?php if ($_SERVER['REQUEST_METHOD'] == "POST" && $error_message[0]==5) { ?>
                         <label style="color: red" for="animal_code">Animal Code:</label>
                     <?php } else if ($_SERVER['REQUEST_METHOD'] == "POST" && $error_message[0]==6){ ?>
                         <label for="animal_code">Animal Code:</label>
                     <?php } ?>
                     <?php if ($_SERVER['REQUEST_METHOD'] == "POST" && ($error_message[0]==5 || $error_message[0]==6)){ ?>
-                        <input type="text" name="animal_code" id="animal_code" value="<?php echo htmlspecialchars($breadCode); ?>"><br>
+                        <input type="text" name="animal_code" id="animal_code" placeholder="ie. 'BRD' " value="<?php echo htmlspecialchars($breadCode); ?>"><br>
                     <?php } ?>
 
                     <!-- traditional input form feilds -- with the exception of the error-reactive coloring -->
@@ -235,10 +323,25 @@
                         <label for="animal_price">Animal Price:</label>
                     <?php } ?>
                     <input type="text" name="animal_price" id="animal_price" value="<?php echo htmlspecialchars($price); ?>"><br>
+
+                    <!-- a toggle-style switch which allows breadCode to be set manually, overridding the automatic setting by the dropdown -->
+                    <br><label for="visibility_checkbox"> Set Animal Code Manually: </label><br>
+                    <label class="switch">
+                        <input type="checkbox" name="visibility_checkbox" id="visibility_checkbox" onclick='toggleVis()'>
+                        <span class="slider round"></span>
+                    </label>
+                    <div id="manual_entry" style="display:none">
+                        <input type="text" name="manual_code" id="manual_code" placeholder="ie. 'BRD-001' " value="<?php echo $breadCode ?>">
+                    </div>
+                    <div class="tooltip">(note)
+                        <span class="tooltiptext">this entry field is not to be used when using the automattic code generation of the drop down or when creating a new animal letter-code and having it automatically assign it a '-001' end to the code, this will override any other code and is only for meeting the requirements of the assignment</span>
+                    </div>
+                    
+                    <br>
             
                     <!-- a reset/clear button -->
                     <br><label for="reset">&nbsp;</label>
-                    <input type="reset" name="reset" id="reset" value="Clear" on-click="<?php unset($error_message) ?>"><br>
+                    <input type="reset" name="reset" id="reset" value="Clear" onclick="<?php unset($error_message) ?>"><br>
 
                     <!-- a submit button -->
                     <br><label for="formSubmit">&nbsp;</label>

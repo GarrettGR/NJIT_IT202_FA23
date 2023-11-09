@@ -14,9 +14,7 @@
     <header class = "topnav">
         
         <div style="float:left; margin-left: 10px; margin-top: 10px;">
-            <figuire>
-                <img style="float:left;width:42px;height:42px;" src = "images\3048235.png" alt = "Hartrum's Pet Shop Logo"  >
-            </figuire>
+            <img style="float:left;width:42px;height:42px;" src = "images\3048235.png" alt = "Hartrum's Pet Shop Logo"  >
             <h1>Hartrum's Pet Shop</h1><br>
             <p style="display:inline; color: var(--text)">Where your pets are family!</p>
             <button onclick="toggleTheme()" style="display: inline">Toggle theme</button>
