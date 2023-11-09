@@ -78,3 +78,5 @@ SELECT * FROM bread;
 SELECT * FROM breadCategories;
 
 DELETE FROM bread WHERE breadCode LIKE "%004";
+
+DELETE FROM bread WHERE breadCode LIKE "LZD%";

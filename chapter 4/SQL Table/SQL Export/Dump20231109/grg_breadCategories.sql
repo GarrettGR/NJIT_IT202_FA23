@@ -1,8 +1,8 @@
 -- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
 --
--- Host: localhost    Database: it202
+-- Host: sql1.njit.edu    Database: grg
 -- ------------------------------------------------------
--- Server version	8.1.0
+-- Server version	8.0.17
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,28 +16,28 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `breadcategories`
+-- Table structure for table `breadCategories`
 --
 
-DROP TABLE IF EXISTS `breadcategories`;
+DROP TABLE IF EXISTS `breadCategories`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `breadcategories` (
-  `breadCategoryID` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `breadCategories` (
+  `breadCategoryID` int(11) NOT NULL AUTO_INCREMENT,
   `breadCategoryName` varchar(255) NOT NULL,
   `dateAdded` datetime NOT NULL,
   PRIMARY KEY (`breadCategoryID`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `breadcategories`
+-- Dumping data for table `breadCategories`
 --
 
-LOCK TABLES `breadcategories` WRITE;
-/*!40000 ALTER TABLE `breadcategories` DISABLE KEYS */;
-INSERT INTO `breadcategories` VALUES (1,'Birds','2018-11-23 13:45:15'),(2,'Cats','2021-09-14 11:10:38'),(3,'Dogs','2021-11-27 22:05:22'),(4,'Snakes','2020-10-07 21:13:54'),(5,'Fish','2022-12-30 07:57:01');
-/*!40000 ALTER TABLE `breadcategories` ENABLE KEYS */;
+LOCK TABLES `breadCategories` WRITE;
+/*!40000 ALTER TABLE `breadCategories` DISABLE KEYS */;
+INSERT INTO `breadCategories` VALUES (1,'Birds','2018-11-23 13:45:15'),(2,'Cats','2021-09-14 11:10:38'),(3,'Dogs','2021-11-27 22:05:22'),(4,'Snakes','2020-10-07 21:13:54'),(5,'Fish','2022-12-30 07:57:01'),(6,'Lizard','2023-05-17 21:17:37');
+/*!40000 ALTER TABLE `breadCategories` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -49,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-10-20 23:56:23
+-- Dump completed on 2023-11-09  9:57:53
