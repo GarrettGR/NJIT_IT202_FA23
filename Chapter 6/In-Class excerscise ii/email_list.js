@@ -1,6 +1,6 @@
 $(document).ready(() => {
   $("#email_address").focus();
-  $("#email_form").submit(event => {
+  $("#email_form").submit((event) => {
     const email = $("#email_address").val();
     let isValid = true;
 
