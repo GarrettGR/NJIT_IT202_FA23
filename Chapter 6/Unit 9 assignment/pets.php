@@ -55,6 +55,16 @@
                     <td><?php echo $row['breadName']; ?></td>
                     <td><?php echo $row['description']; ?></td>
                     <td><?php echo $row['price']; ?></td>
+                    
+                    <?php if ($_SESSION['logged_in']) { ?>
+                        <?php $bread_code = $row['breadCode'] ?>
+
+                        <td><form action = "delete.php" method = "POST">
+                            <input type = "hidden" name = "breadCode" value = "<?php echo $bread_code ?>">
+                            <input type = "submit" value = "Delete">
+                        </form></td>
+                    <?php } ?>
+
                 <tr>
             <?php endforeach; ?>
 

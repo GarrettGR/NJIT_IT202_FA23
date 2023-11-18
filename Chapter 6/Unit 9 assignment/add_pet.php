@@ -1,5 +1,15 @@
 <!-- a page to insert a new animal into the pet store SQL page; provides the ability to 'bring a rescue' to the pet store -->
 <?php
+
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+
+    if (!$_SESSION['logged_in']) {
+        include('login_error.php');
+        exit();
+    }
+
     $get_codes = function(){
         global $db;
         global $result;

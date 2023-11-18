@@ -1,4 +1,13 @@
 <?php
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+
+    if (!$_SESSION['logged_in']) {
+        include('login_error.php');
+        exit();
+    }
+
     if (!isset($first_name)) { $first_name = ''; }
     if (!isset($last_name)) { $last_name = ''; }
     if (!isset($address_one)) { $address_one = ''; }
