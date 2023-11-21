@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <title>Register</title>
+        <link rel="stylesheet" type="text/css" href="register.css">
+    </head>
+    <body>
+        <main>
+            <h1>Register</h1>
+            <form id="register_form" action="register.php" method="get">
+                <div>
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name">
+                </div>
+                <div>
+                    <label for="contact_me">Contact Me By:</label>
+                    <input type="radio" name="contact_me" id="contact_me" value="email" checked>Email
+                    <input type="radio" name="contact_me" id="contact_me" value="phone">Phone
+                    <input type="radio" name="contact_me" id="contact_me" value="none" checked>None
+                </div>
+                <div id="contact_text"></div>
+                <div>
+                    <input type="submit" value="Register">
+                </div>
+            </form>
+        </main>
+        <script src="register.js"></script>
+    </body>
+</html>
