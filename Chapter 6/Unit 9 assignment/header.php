@@ -1,10 +1,10 @@
 <?php
-    if (session_status() == PHP_SESSION_NONE) {
-        session_start();
-        if (!isset($_SESSION['logged_in'])) {
-            $_SESSION['logged_in'] = false;
-        }
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+    if (!isset($_SESSION['logged_in'])) {
+        $_SESSION['logged_in'] = false;
     }
+}
 ?>
 
 <!DOCTYPE html>
@@ -32,13 +32,15 @@
         <button onclick="toggleTheme()" style="display: inline">Toggle theme</button>
 
         <?php if ($_SESSION['logged_in']) { ?>
-            <form action = "login.php" method = "POST" style="display: inline">
-                <input type = "hidden" name = "action" value = "logout" style="display: inline">
-                <input type = "submit" value = "Logout" style="display: inline"></form>
+            <form action="login.php" method="POST" style="display: inline">
+                <input type="hidden" name="action" value="logout" style="display: inline">
+                <input type="submit" value="Logout" style="display: inline">
+            </form>
         <?php } else { ?>
-            <form action = "login.php" method = "POST" style='display: inline'>
-                <input type = "hidden" name = "action" value = "login" style="display: inline">
-                <input type = "submit" value = "Login" style="display: inline"></form>
+            <form action="login.php" method="POST" style='display: inline'>
+                <input type="hidden" name="action" value="login" style="display: inline">
+                <input type="submit" value="Login" style="display: inline">
+            </form>
         <?php } ?>
 
         <?php if ($_SESSION['logged_in']) { ?>

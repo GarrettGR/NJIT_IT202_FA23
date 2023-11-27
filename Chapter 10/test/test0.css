@@ -1,0 +1,17 @@
+@media (prefers-color-scheme: dark) {
+    html{
+        background-color: red;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    html{
+        background-color: blue;
+    }
+}
+
+@media (prefers-color-scheme: no-preference) {
+    html{
+        background-color: green;
+    }
+}
