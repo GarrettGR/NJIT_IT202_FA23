@@ -11,4 +11,5 @@
             </div>
         </main>
         <?php include 'src/html/footer.html'; ?>
+    </body>
 </html>

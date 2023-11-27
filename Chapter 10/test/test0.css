@@ -1,17 +1,11 @@
-@media (prefers-color-scheme: dark) {
-    html{
-        background-color: red;
-    }
+.modal-header,
+h4,
+.close {
+  background-color: #5cb85c;
+  color: white !important;
+  text-align: center;
+  font-size: 30px;
 }
-
-@media (prefers-color-scheme: light) {
-    html{
-        background-color: blue;
-    }
-}
-
-@media (prefers-color-scheme: no-preference) {
-    html{
-        background-color: green;
-    }
+.modal-footer {
+  background-color: #f9f9f9;
 }
