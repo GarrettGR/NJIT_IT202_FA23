@@ -1,14 +1,16 @@
 <html>
-    <?php include 'src/php/head.php'; ?>
-    <body>
-        <?php include 'src/html/header.html'; ?>
-        <main>
-            <div class="row">
-                <div class="col-6">
-                    <h1>Pets</h1>
-                    <p>This is the pets page!</p>
-                </div>
+<?php include 'src/php/head.php'; ?>
+
+<body>
+    <?php include 'src/html/header.html'; ?>
+    <main>
+        <div class="row">
+            <div class="col-6">
+                <h1>Pets</h1>
+                <p>This is the pets page!</p>
             </div>
-        </main>
-        <?php include 'src/html/footer.html'; ?>
+        </div>
+    </main>
+    <?php include 'src/html/footer.html'; ?>
+
 </html>

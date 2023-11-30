@@ -2,7 +2,7 @@
   <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
     <!-- image and brand name -->
     <a class="navbar-brand" href="index.php">
-      <img class="logo" src="images\pet-store-icon.png" width="30" height="30" alt="" />
+      <img src="images\pet-store-icon.png" width="30" height="30" alt="" />
       Hartrum's Pet Shop
     </a>
 
@@ -59,66 +59,52 @@
     </div>
 
     <!-- div holding login/logout button & modal -->
-    <div class="login pull-left">
+    <div class="pull-left">
+      <!-- login button -->
       <button
         type="button"
-        class="btn btn-dark"
+        class="btn btn-outline-secondary"
+        id="login-btn"
         data-bs-toggle="modal"
-        data-bs-target="#ModalForm"
+        data-bs-target="#login-modal"
       >
         Login
       </button>
-    </div>
-  </nav>
-  <div
-  class="modal fade"
-  tabindex="-1"
-  role="dialog"
-  id="ModalForm"
-  aria-labelledby="ModalFormLabel"
-  aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-body">
-        <button
-          type="button"
-          class="btn-close btn-close-white"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-        <div class="myform bg-dark">
-          <h1 class="text-center">Login Form</h1>
-          <form>
-            <div class="mb-3 mt-4">
-              <label for="exampleInputEmail1" class="form-label"
-                >Email address</label
-              >
-              <input
-                type="email"
-                class="form-control"
-                id="exampleInputEmail1"
-                aria-describedby="emailHelp"
-              />
+
+      <!-- login modal -->
+      <div
+        class="modal fade"
+        id="login-modal"
+        tabindex="-1"
+        aria-labelledby="login-modal"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">
+                &times;
+              </button>
+              <h4 class="modal-title">Login</h4>
             </div>
-            <div class="mb-3">
-              <label for="exampleInputPassword1" class="form-label"
-                >Password</label
-              >
-              <input
-                type="password"
-                class="form-control"
-                id="exampleInputPassword1"
-              />
+            <div class="modal-body">
+              <form>
+                <h1>LOGIN FORM HERE</h1>
+              </form>
             </div>
-            <button type="submit" class="btn btn-light mt-3">
-              LOGIN
-            </button>
-            <p>Not a member? <a href="#">Signup now</a></p>
-          </form>
+            <div class="modal-footer">
+              <button
+                type="submit"
+                class="btn btn-danger btn-default pull-left"
+                data-dismiss="modal"
+              >
+                <span class="glyphicon glyphicon-remove"></span>
+                Cancel
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
-</div>
+  </nav>
 </header>
