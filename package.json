@@ -1,8 +1,0 @@
-{
-  "dependencies": {
-    "ajax": "^0.0.4",
-    "boostrap": "^2.0.0",
-    "jquery": "^3.7.1",
-    "popper": "^1.0.1"
-  }
-}
