@@ -33,7 +33,26 @@ $(document).ready(() => {
       - This field should not exceed $100,000
     */
 
-    
+    // validate animal code
+    if ($("#automatic").prop("checked") == false) {
+      const animalCode = $("#animal-code").val();
+
+      if (animalCode == "") {
+        $("#animal-code").next().text("This field is required.");
+        isValid = false;
+      } else if (animalCode.length < 4) {
+        $("#animal-code").next().text("Must be 4 or more characters.");
+        isValid = false;
+      } else if (animalCode.length > 10) {
+        $("#animal-code").next().text("Must be 10 or less characters.");
+        isValid = false;
+      } else {
+        $("#animal-code").next().text("");
+      }
+    }
+
+    // validate animal name
+    const animalName = $("#animal-name").val();
 
     if (!isValid) {
       event.preventDefault();

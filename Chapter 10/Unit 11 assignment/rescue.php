@@ -59,7 +59,7 @@ if (!isset($result)) {
 
                     <!-- dropdown to select animal type -->
                     <div class="mb-3" id="animal-type">
-                        <label for="animal-type" class="form-label">Animal Type</label>
+                        <label for="animal-type" class="form-label">Animal Type</label><span>*</span>
                         <select class="form-select" aria-label="Default select example" name="animal_type" id="animal_type">
                             <option value="0" selected>Choose an animal type</option>
                             <?php foreach ($result as $row) : ?>
@@ -99,19 +99,19 @@ if (!isset($result)) {
 
                     <!-- the rest of the form inputs -->
                     <div class="mb-3" id="animal_code" style="display: none">
-                        <label for="animal-code" class="form-label">Animal Code</label>
+                        <label for="animal-code" class="form-label">Animal Code</label><span>*</span>
                         <input type="text" class="form-control" id="animal-code" name="breadCode" value="<?php echo $breadCode; ?>">
                     </div>
                     <div class="mb-3" id="animal_name">
-                        <label for="animal-name" class="form-label">Animal Name</label>
+                        <label for="animal-name" class="form-label">Animal Name</label><span>*</span>
                         <input type="text" class="form-control" id="animal-name" name="breadName" value="<?php echo $breadName; ?>">
                     </div>
                     <div class="mb-3" id="animal_description">
-                        <label for="animal-description" class="form-label">Animal Description</label>
+                        <label for="animal-description" class="form-label">Animal Description</label><span>*</span>
                         <textarea class="form-control" id="animal-description" name="description" rows="3" value="<?php echo $description ?>"></textarea>
                     </div>
                     <div class="mb-3" id="animal_price">
-                        <label for="animal-price" class="form-label">Animal Price</label>
+                        <label for="animal-price" class="form-label">Animal Price</label><span>*</span>
                         <input type="text" class="form-control" id="animal-price" name="price" value="<?php echo $price; ?>">
                     </div>
 
