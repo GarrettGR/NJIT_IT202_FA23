@@ -4,7 +4,7 @@
 
 <body>
     <?php include 'src/html/header.html'; ?>
-    <main>
+    <main class="bg-light text-dark">
         <div class="row">
             <div class="col-6">
                 <h1>Details</h1>

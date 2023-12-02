@@ -8,7 +8,7 @@ include_once('src/php/login_verify.php');
 
 <body>
     <?php include 'src/html/header.html'; ?>
-    <main>
+    <main class="bg-light text-dark">
         <div class="row">
             <div class="col-6">
                 <h1>Shipping</h1>

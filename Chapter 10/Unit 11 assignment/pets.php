@@ -26,9 +26,9 @@ $data = $statement->fetchAll();
 <html lang="en">
 <?php include 'src/php/head.php'; ?>
 
-<body style="padding-top: 3em">
+<body>
   <?php include 'src/html/header.html'; ?>
-  <main>
+  <main class="bg-light text-dark">
     <div class="row"> <!-- bg-dark text-light -->
       <div class="col-12">
         <h1> Our Pets: </h1>
