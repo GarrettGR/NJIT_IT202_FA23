@@ -1,4 +1,5 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <?php include 'src/php/head.php'; ?>
 
 <body>
@@ -6,7 +7,7 @@
     <main class="bg-light text-dark">
         <div class="row">
             <div class="col-6">
-                <h1 style="text-align:center; padding-top:0em">Family owned for over 30 years!</h1>
+                <h1 id="description" style="text-align:center; padding-top:0em">Family owned for over 30 years!</h1>
                 <figure>
                     <img src="images/pet-store-header.jpg" alt="pet store header" class="img-fluid">
                 </figure>
@@ -24,22 +25,22 @@
         </div>
         <h1 id="goods">Our Goods:</h1>
         <div class="row">
-                <div class="col-3">
-                    <figure>
-                        <img src="images\pet-food-1.jpg" alt="pet foods"  class="img-fluid">
-                    </figure>
-                </div>
-                <div class="col-3">
-                    <h5>Indulge your furry friend with our exquisite range of high-end pet food options at Hartrum's Pet Shop. </h5>
-                </div>
-                <div class="col-3">
-                    <figure>
-                        <img src="images\pet-food-0.jpg" alt="pet foods"  class="img-fluid">
-                    </figure>
-                </div>
-                <div class="col-3">
-                    <h5>From gourmet grain-free kibble to organic, locally-sourced treats, our curated selection ensures that your pet receives the finest nutrition available. </h5>
-                </div>
+            <div class="col-3">
+                <figure>
+                    <img src="images\pet-food-1.jpg" alt="pet foods" class="img-fluid">
+                </figure>
+            </div>
+            <div class="col-3">
+                <h5>Indulge your furry friend with our exquisite range of high-end pet food options at Hartrum's Pet Shop. </h5>
+            </div>
+            <div class="col-3">
+                <figure>
+                    <img src="images\pet-food-0.jpg" alt="pet foods" class="img-fluid">
+                </figure>
+            </div>
+            <div class="col-3">
+                <h5>From gourmet grain-free kibble to organic, locally-sourced treats, our curated selection ensures that your pet receives the finest nutrition available. </h5>
+            </div>
         </div>
         <h1 id="animals"> Our Animals:</h1>
         <div class="row">
@@ -62,7 +63,7 @@
         </div>
         <h1 id="services"> Our Services:</h1>
         <div class="row">
-            <div class="col-3">
+            <div class="col-3 d-flex">
                 <figure>
                     <img src="images\vet-services-0.jpg" alt="veterinatian services" class="img-fluid">
                 </figure>
