@@ -19,7 +19,7 @@
 
 
     <!-- Custom JavaScript -->
-    <script src="../src/js/script.js"></script>
+    <script src="../src/js/login_data.js"></script>
 
 
 </head>

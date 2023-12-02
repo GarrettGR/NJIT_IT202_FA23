@@ -1,6 +1,5 @@
 body {
-  margin-top: 50px;
-  padding-top: 1em;
+  padding-top: 60px;
 }
 footer {
   padding-bottom: 20px;
@@ -41,10 +40,10 @@ footer {
     margin: 0 auto;
   }
 }
-.form-control:focus {
+.login-form-control:focus {
   box-shadow: inset 0 -1px 0 #7e7e7e;
 }
-.form-control {
+.login-form-control {
   background-color: inherit;
   color: #fff;
   padding-left: 0;

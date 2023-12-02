@@ -4,7 +4,7 @@
 
 <body>
     <?php include 'src/html/header.html'; ?>
-    <main>
+    <main class="bg-light text-dark">
 
         <h1> Error 401: Unauthorizaed </h1>
         <img src=https://http.cat/401.jpg alt="unauthorized" class="errorIMG">

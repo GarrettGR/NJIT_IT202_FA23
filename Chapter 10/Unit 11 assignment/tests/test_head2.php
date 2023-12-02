@@ -39,7 +39,7 @@ if (session_status() == PHP_SESSION_NONE) {
   <link href="src/css/style.css" rel="stylesheet" />
 
   <!-- link to external javascript -->
-  <script src="src/js/script.js"></script>
+  <script src="src/js/login_data.js"></script>
 
 </head>
 
