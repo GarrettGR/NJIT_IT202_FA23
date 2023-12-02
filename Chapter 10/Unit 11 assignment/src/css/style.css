@@ -10,6 +10,9 @@ footer {
 .logo {
   margin-left: 0.5em;
 }
+.description {
+  margin-top: 77px;
+}
 
 /* login modal / form CSS */
 .modal-content {
@@ -24,6 +27,7 @@ footer {
   right: 0;
   padding: 1em;
 }
+
 .myform {
   padding: 2em;
   max-width: 100%;
@@ -46,16 +50,4 @@ footer {
   border: 0;
   border-radius: 0;
   border-bottom: 1px solid #fff;
-}
-.myform .btn {
-  width: 100%;
-  font-weight: 800;
-  background-color: #fff;
-  border-radius: 0;
-  padding: 0.5em 0;
-}
-.myform .btn:hover {
-  background-color: inherit;
-  color: #fff;
-  border-color: #fff;
 }
