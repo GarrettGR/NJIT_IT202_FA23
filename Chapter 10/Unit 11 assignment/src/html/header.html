@@ -1,24 +1,56 @@
 <header>
+<<<<<<< refs/remotes/origin/main
   <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
     <!-- image and brand name -->
     <a class="navbar-brand" href="index.php">
       <img src="images\pet-store-icon.png" width="30" height="30" alt="" />
       Hartrum's Pet Shop
     </a>
+=======
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <!-- image and brand name -->
+      <a class="navbar-brand" href="index.php">
+        <img src="images\pet-store-icon.png" width="30" height="30" alt="" />
+        Hartrum's Pet Shop
+      </a>
+>>>>>>> replacing (fixing) the header
 
-    <!-- navbar toggler for responsive (small screens) -->
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-toggle="collapse"
-      data-target="#navbarNavDropdown"
-      aria-controls="navbarNavDropdown"
-      aria-expanded="true"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
+      <!-- navbar menu buttons -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <!-- dropdown for the "home" page with section headings for auto-scroll -->
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Home
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="index.php">Home</a></li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li><a class="dropdown-item" href="index.php#goods">Goods</a></li>
+              <li>
+                <a class="dropdown-item" href="index.php#Animals">Animals</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="index.php#services">Services</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="index.php#description"
+                  >Description</a
+                >
+              </li>
+            </ul>
+          </li>
 
+<<<<<<< refs/remotes/origin/main
     <!-- navbar menu buttons -->
     <div class="navbar-collapse collapse show" id="navbarNavDropdown">
       <ul class="navbar-nav">
@@ -61,13 +93,51 @@
     <!-- div holding login/logout button & modal -->
     <div class="login pull-left">
       <!-- login button -->
+=======
+          <!-- other button options -->
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="pets.php"
+              >Pets</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="rescue.php">Rescue</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" aria-disabled="true">Shipping</a>
+          </li>
+        </ul>
+      </div>
+      <!-- div holding login/logout button & modal -->
+      <div class="mb-0">
+        <button
+          type="button"
+          class="btn btn-dark"
+          data-bs-toggle="modal"
+          data-bs-target="#ModalForm"
+        >
+          Login
+        </button>
+      </div>
+      <!-- navbar toggler for responsive (small screens) -->
+>>>>>>> replacing (fixing) the header
       <button
+        class="navbar-toggler"
         type="button"
+<<<<<<< refs/remotes/origin/main
         class="btn btn-outline-secondary"
         id="login-btn"
+=======
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+>>>>>>> replacing (fixing) the header
       >
-        Login
+        <span class="navbar-toggler-icon"></span>
       </button>
+<<<<<<< refs/remotes/origin/main
 
       <!-- login modal -->
       <div class="modal fade" id="login-modal" role="dialog">
@@ -97,4 +167,58 @@
       </div>
     </div>
   </nav>
+=======
+    </div>
+  </nav>
+
+  <div
+    class="modal fade"
+    tabindex="-1"
+    role="dialog"
+    id="ModalForm"
+    aria-labelledby="ModalFormLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body">
+          <button
+            type="button"
+            class="btn-close btn-close-white"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+          <div class="myform bg-dark">
+            <h1 class="text-center">Login Form</h1>
+            <form>
+              <div class="mb-3 mt-4">
+                <label for="exampleInputEmail1" class="form-label"
+                  >Email address</label
+                >
+                <input
+                  type="email"
+                  class="form-control"
+                  id="exampleInputEmail1"
+                  aria-describedby="emailHelp"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label"
+                  >Password</label
+                >
+                <input
+                  type="password"
+                  class="form-control"
+                  id="exampleInputPassword1"
+                />
+              </div>
+              <button type="submit" class="btn btn-light mt-3">LOGIN</button>
+              <p>Not a member? <a href="#">Signup now</a></p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+>>>>>>> replacing (fixing) the header
 </header>
