@@ -9,9 +9,6 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-
 <head>
   <title>Hartrum's Pet Shop - Home</title>
 
@@ -44,5 +41,3 @@ if (session_status() == PHP_SESSION_NONE) {
   <script src="src/js/script.js"></script>
 
 </head>
-
-</html>

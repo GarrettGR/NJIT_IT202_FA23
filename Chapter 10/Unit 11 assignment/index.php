@@ -1,4 +1,5 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <?php include 'src/php/head.php'; ?>
 
 <body>
@@ -6,7 +7,11 @@
     <main>
         <div class="row" style="padding-top:1em">
             <div class="col-6">
+<<<<<<< refs/remotes/origin/main
                 <h1 style="text-align:center; padding-top:0em" id="description">Family owned for over 30 years!</h1>
+=======
+                <h1 id="description" style="text-align:center; padding-top:0em">Family owned for over 30 years!</h1>
+>>>>>>> working on final assignment
                 <figure>
                     <img src="images/pet-store-header.jpg" alt="pet store header" class="img-fluid">
                 </figure>
@@ -25,6 +30,7 @@
         </div>
         <h1 id="goods">Our Goods:</h1>
         <div class="row">
+<<<<<<< refs/remotes/origin/main
             <div class="column">
                 <figure>
                     <img src="images\store_collage_5.jpg" alt="pet store" class="responsiveIMG">
@@ -36,6 +42,23 @@
                     <img src="images\store_collage_7.jpg" alt="pet store" class="responsiveIMG">
                 </figure>
                 <h2 class="responsiveTXT">From gourmet grain-free kibble to organic, locally-sourced treats, our curated selection ensures that your pet receives the finest nutrition available. <h2>
+=======
+            <div class="col-3">
+                <figure>
+                    <img src="images\pet-food-1.jpg" alt="pet foods" class="img-fluid">
+                </figure>
+            </div>
+            <div class="col-3">
+                <h5>Indulge your furry friend with our exquisite range of high-end pet food options at Hartrum's Pet Shop. </h5>
+            </div>
+            <div class="col-3">
+                <figure>
+                    <img src="images\pet-food-0.jpg" alt="pet foods" class="img-fluid">
+                </figure>
+            </div>
+            <div class="col-3">
+                <h5>From gourmet grain-free kibble to organic, locally-sourced treats, our curated selection ensures that your pet receives the finest nutrition available. </h5>
+>>>>>>> working on final assignment
             </div>
         </div>
         <h1 id="animals"> Our Animals:</h1>
@@ -55,7 +78,11 @@
         </div>
         <h1 id="services"> Our Services:</h1>
         <div class="row">
+<<<<<<< refs/remotes/origin/main
             <div class="column">
+=======
+            <div class="col-3 d-flex">
+>>>>>>> working on final assignment
                 <figure>
                     <img src="images\vet_services_collage_r2-2.jpg" alt="pet store" class="responsiveIMG">
                 </figure>

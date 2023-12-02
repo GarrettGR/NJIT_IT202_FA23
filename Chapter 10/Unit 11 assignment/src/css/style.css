@@ -1,5 +1,10 @@
 body {
+<<<<<<< refs/remotes/origin/main
     padding-top: 50px;
+=======
+  margin-top: 50px;
+  padding-top: 1em;
+>>>>>>> working on final assignment
 }
 footer {
     padding-bottom: 20px;
