@@ -11,48 +11,65 @@ $(document).ready(() => {
     }
   });
 
-  $("#rescue_form").submit((event) => {
+  $("#rescue_form").on("submit", (event) => {
     let isValid = true;
 
-    /*
-    Bread Code
-      - This field should not be blank
-      - This field should have a minimum of 4 characters
-      - This field should have a maximum of 10 characters
-    Bread Name
-      - This field should not be blank
-      - This field should have a minimum of 10 characters
-      - This field should have a maximum of 100 characters
-    Bread Description
-      - This field should not be blank
-      - This field should have a minimum of 10 characters
-      - This field should have a maximum of 255 characters.
-    Bread Price
-      - This field should not be blank
-      - This field should not be negative or zero
-      - This field should not exceed $100,000
-    */
+    // Ensure an Animal Type is selected
+    const animalType = $("#animal_type").val();
+    if (animalType == 0) {
+      isValid = false;
+      $("#animal_type").addClass("is-invalid");
+      $("#animal-type-feedback").text("Please select an animal type").show();
+    } else {
+      $("#animal_type").removeClass("is-invalid");
+      $("#animal-type-feedback").hide();
+    }
 
-    // validate animal code
-    if ($("#automatic").prop("checked") == false) {
+    // Validate Animal Code only if "automatic" is unchecked
+    if (!$("#automatic").is(":checked")) {
       const animalCode = $("#animal-code").val();
-
-      if (animalCode == "") {
-        $("#animal-code").next().text("This field is required.");
+      if (animalCode.length < 4 || animalCode.length > 10) {
         isValid = false;
-      } else if (animalCode.length < 4) {
-        $("#animal-code").next().text("Must be 4 or more characters.");
-        isValid = false;
-      } else if (animalCode.length > 10) {
-        $("#animal-code").next().text("Must be 10 or less characters.");
-        isValid = false;
+        $("#animal-code").addClass("is-invalid");
+        $("#animal-code-feedback").text("Animal code must be between 4 and 10 characters").show();
       } else {
-        $("#animal-code").next().text("");
+        $("#animal-code").removeClass("is-invalid");
+        $("#animal-code-feedback").hide();
       }
     }
 
-    // validate animal name
+    // Validate Animal Name
     const animalName = $("#animal-name").val();
+    if (animalName.length < 10 || animalName.length > 100) {
+      isValid = false;
+      $("#animal-name").addClass("is-invalid");
+      $("#animal-name-feedback").text("Animal name must be between 10 and 100 characters").show();
+    } else {
+      $("#animal-name").removeClass("is-invalid");
+      $("#animal-name-feedback").hide();
+    }
+
+    // Validate Animal Description
+    const animalDescription = $("#animal-description").val();
+    if (animalDescription.length < 10 || animalDescription.length > 255) {
+      isValid = false;
+      $("#animal-description").addClass("is-invalid");
+      $("#animal-description-feedback").text("Animal description must be between 10 and 255 characters").show();
+    } else {
+      $("#animal-description").removeClass("is-invalid");
+      $("#animal-description-feedback").hide();
+    }
+
+    // Validate Animal Price
+    const animalPrice = $("#animal-price").val();
+    if (animalPrice <= 0 || animalPrice > 100000) {
+      isValid = false;
+      $("#animal-price").addClass("is-invalid");
+      $("#animal-price-feedback").text("Animal price must be between $0 and $100,000").show();
+    } else {
+      $("#animal-price").removeClass("is-invalid");
+      $("#animal-price-feedback").hide();
+    }
 
     if (!isValid) {
       event.preventDefault();

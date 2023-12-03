@@ -3,7 +3,7 @@
 require_once('src/php/database.php');
 
 //query statement to get all data from the bread table and join it with the breadCategories table
-$statement = $db->query("SELECT breadCategoryName, breadCode, breadName, description, price FROM breadCategories INNER JOIN bread ON breadCategories.breadCategoryID = bread.breadCategoryID");
+$statement = $db->query("SELECT breadCategoryName, breadID, breadCode, breadName, description, price FROM breadCategories INNER JOIN bread ON breadCategories.breadCategoryID = bread.breadCategoryID");
 $data = $statement->fetchAll();
 ?>
 
@@ -45,7 +45,7 @@ $data = $statement->fetchAll();
                 <td><?php echo $row['price']; ?></td>
 
                 <td>
-                  <a href="details.php?breadID=<?php echo $row['breadCode']; ?>">Details</a>
+                  <a href="details.php?breadID=<?php echo $row['breadID']; ?>">Details</a>
                 </td>
 
                 <?php if ($_SESSION['logged_in']) { ?>
@@ -69,5 +69,6 @@ $data = $statement->fetchAll();
     </div>
   </main>
   <?php include 'src/html/footer.html'; ?>
+</body>
 
 </html>
