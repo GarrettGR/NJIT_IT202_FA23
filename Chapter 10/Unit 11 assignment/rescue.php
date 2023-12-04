@@ -178,6 +178,7 @@ if (!isset($result)) {
     </div>
   </main>
 
+  <!-- php/jquery error message handling -->
   <?php if($_SESSION['pet_error_message'] != array()) { ?>
     <?php if($_SESSION['pet_error_message'][0]=='type') { ?>
       <script>

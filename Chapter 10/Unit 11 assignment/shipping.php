@@ -1,28 +1,17 @@
 <?php
 include_once('src/php/login_verify.php');
 
-//! WAS USED WHILE TROUBLESHOOTING; DEPRECATED BUT NOT YET REMOVED
-// check if the data can be unserialized
-function is_serialized($value){
-  $data = @unserialize($value);
-  return $data !== false || $value === 'b:0;';
+// set the default values for session variables if they dont exist
+if (!isset($_SESSION['shipping_data'])) {
+  $_SESSION['shipping_data'] = array();
+}
+if (!isset($_SESSION['label_error_message'])) {
+  $_SESSION['label_error_message'] = array();
 }
 
-// set the default values for session variables if they dont exist
-// if (!isset($_SESSION['shipping_data'])) {
-//   $_SESSION['shipping_data'] = array();
-// }
-// if (!isset($_SESSION['label_error_message'])) {
-//   $_SESSION['label_error_message'] = array();
-// }
-
 // get the data from the serialized array (if it exists)
-if ($_SESSION['shipping_data'] != '') {
-
-  // TODO: remove the serialized
-  // check if the data is serialized
-  if (is_serialized($_SESSION['shipping_data'])) {
-    $shipping_data = unserialize($_SESSION['shipping_data']);
+if ($_SESSION['shipping_data'] != array()) {
+    $shipping_data = $_SESSION['shipping_data'];
     $first_name = $shipping_data['first_name'];
     $last_name = $shipping_data['last_name'];
     $address_one = $shipping_data['address_one'];
@@ -34,7 +23,6 @@ if ($_SESSION['shipping_data'] != '') {
     $package_dimensions = $shipping_data['package_dimensions'];
     $package_weight = $shipping_data['package_weight'];
     $order_number = $shipping_data['order_number'];
-  }
 }
 
 if (!isset($first_name)) {
@@ -87,13 +75,11 @@ if (!isset($order_number)) {
         <form class="pt-2" action="display_label.php" method="post" name="shipping_form" id="rescue_form">
 
           <!-- error message -->
-          <?php if (!empty($_SESSION['label_error_message'])) { ?>
+          <?php if ($_SESSION['label_error_message']!=array()) { ?>
             <div class="text-danger mt-2" id="general_error">
-              <p> <?php echo $_SESSION['label_error_message'] ?> </p>
+              <p> <?php echo $_SESSION['label_error_message'][1] ?> </p>
             </div>
           <?php } ?>
-
-
 
           <h2 class="mt-2">Address Information: </h2>
           <div class="row">
@@ -173,6 +159,121 @@ if (!isset($order_number)) {
       </div>
     </div>
   </main>
+
+  <!-- php/jquery error message handling -->
+  <?php if ($_SESSION['label_error_message']!=array()) { ?>
+    <?php if ($_SESSION['label_error_message'][0]=='first') { ?>
+      <script>
+        $('#first-name').addClass('is-invalid');
+        $('#first_name_error').text('<?php echo $_SESSION['label_error_message'][1]; ?>').show();
+      </script>
+    <?php } else {?>
+      <script>
+        $('#first-name').removeClass('is-invalid');
+        $("#first_name_error").hide();
+      </script>
+    <?php } ?>
+    <?php if ($_SESSION['label_error_message'][0]=='last') { ?>
+      <script>
+        $('#last-name').addClass('is-invalid');
+        $('#last_name_error').text('<?php echo $_SESSION['label_error_message'][1]; ?>').show();
+      </script>
+    <?php } else {?>
+      <script>
+        $('#last-name').removeClass('is-invalid');
+        $("#last_name_error").hide();
+      </script>
+    <?php } ?>
+    <?php if ($_SESSION['label_error_message'][0]=='address') { ?>
+      <script>
+        $('#address-one').addClass('is-invalid');
+        $('#address_one_error').text('<?php echo $_SESSION['label_error_message'][1]; ?>').show();
+      </script>
+    <?php } else {?>
+      <script>
+        $('#address-one').removeClass('is-invalid');
+        $("#address_one_error").hide();
+      </script>
+    <?php } ?>
+    <?php if($_SESSION['label_error_message'][0]=='city') { ?>
+      <script>
+        $('#city').addClass('is-invalid');
+        $('#city_error').text('<?php echo $_SESSION['label_error_message'][1]; ?>').show();
+      </script>
+    <?php } else {?>
+      <script>
+        $('#city').removeClass('is-invalid');
+        $("#city_error").hide();
+      </script>
+    <?php } ?>
+    <?php if($_SESSION['label_error_message'][0]=='state') { ?>
+      <script>
+        $('#state').addClass('is-invalid');
+        $('#state_error').text('<?php echo $_SESSION['label_error_message'][1]; ?>').show();
+      </script>
+    <?php } else {?>
+      <script>
+        $('#state').removeClass('is-invalid');
+        $("#state_error").hide();
+      </script>
+    <?php } ?>
+    <?php if($_SESSION['label_error_message'][0]=='zip') { ?>
+      <script>
+        $('#zip-code').addClass('is-invalid');
+        $('#zip_code_error').text('<?php echo $_SESSION['label_error_message'][1]; ?>').show();
+      </script>
+    <?php } else {?>
+      <script>
+        $('#zip-code').removeClass('is-invalid');
+        $("#zip_code_error").hide();
+      </script>
+    <?php } ?>
+    <?php if($_SESSION['label_error_message'][0]=='date') { ?>
+      <script>
+        $('#ship-date').addClass('is-invalid');
+        $('#ship_date_error').text('<?php echo $_SESSION['label_error_message'][1]; ?>').show();
+      </script>
+    <?php } else {?>
+      <script>
+        $('#ship-date').removeClass('is-invalid');
+        $("#ship_date_error").hide();
+      </script>
+    <?php } ?>
+    <?php if($_SESSION['label_error_message'][0]=='dimensions') { ?>
+      <script>
+        $('#package-dimensions').addClass('is-invalid');
+        $('#package_dimensions_error').text('<?php echo $_SESSION['label_error_message'][1]; ?>').show();
+      </script>
+    <?php } else {?>
+      <script>
+        $('#package-dimensions').removeClass('is-invalid');
+        $("#package_dimensions_error").hide();
+      </script>
+    <?php } ?>
+    <?php if($_SESSION['label_error_message'][0]=='weight') { ?>
+      <script>
+        $('#package-weight').addClass('is-invalid');
+        $('#package_weight_error').text('<?php echo $_SESSION['label_error_message'][1]; ?>').show();
+      </script>
+    <?php } else {?>
+      <script> 
+        $('#package-weight').removeClass('is-invalid');
+        $("#package_weight_error").hide();
+      </script>
+    <?php } ?>
+    <?php if($_SESSION['label_error_message'][0]=='number') { ?>
+      <script>
+        $('#order-number').addClass('is-invalid');
+        $('#order_number_error').text('<?php echo $_SESSION['label_error_message'][1]; ?>').show();
+      </script>
+    <?php } else {?>
+      <script>
+        $('#order-number').removeClass('is-invalid');
+        $("#order_number_error").hide();
+      </script>
+    <?php } ?>
+  <?php } ?>
+
 
   <!-- unset the saved session shipping data and error messages -->
   <?php unset($_SESSION['shipping_data']); ?>

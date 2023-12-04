@@ -36,7 +36,7 @@ if ($animal_type == 0 || $animal_type == '') {
 } else if (empty($animal_description)) {
   $error_message[0] = 'description';
   $error_message[1] = 'Animal description cannot be empty.';
-} else if (empty($animal_price)) //! PUT BACK THE EMPTY
+} else if (empty($animal_price))
   $error_message[0] = 'price';
   $error_message[1] = 'Animal price cannot be empty.';
 
@@ -52,3 +52,5 @@ if ($error_message[0] != 0) {
 // get codes from session
 $codes = $_SESSION['codes'];
 echo "codes: ";
+
+// TODO: handle automatic code generation (and everything else after that point)

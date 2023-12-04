@@ -67,7 +67,7 @@ $data = $statement->fetchAll();
                 <!-- details button -->
                 <td>
                   <!-- <a href="details.php?breadID=<?php echo $row['breadID']; ?>">Details</a> -->
-                  <button type="button" class="btn btn-outline-info btn-sm" on-click="window.location.href=details.php?breadID=<?php echo $row['breadID']; ?>">Details</button>
+                  <button type="button" class="btn btn-outline-info btn-sm" onclick="window.location.href='details.php?breadID=<?php echo $row['breadID']; ?>'">Details</button>
                 </td>
 
                 <!-- delete button -- only if the user is logged in -->
