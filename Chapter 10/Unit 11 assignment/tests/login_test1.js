@@ -1,12 +1,3 @@
-<<<<<<< refs/remotes/origin/main
-$(document).ready(function() {
-    console.log('document ready')
-    $('#login-btn').click(function() {
-        console.log('login-btn clicked')
-        $('#login-modal').modal();
-    });
-});
-=======
 // if the person is logged in, show the logout button and hide the login button
 // if the person is logged out, show the login button and hide the logout button
 // if the person is logged in, show their name and email address in the welcome text
@@ -54,39 +45,42 @@ const displayWelcome = (data) => {
     $("#login").show();
     $("#logout").hide();
   }
-  return data;
 };
 
 // show errors if login fails (in the modal)
 const login_error = (data) => {
-  if (data && data.login_error.length > 0) {
-    let error = data.login_error;
-    let email = data.login_data['email'];
+  if (data) {
+    if (data.login_error) {
+      let error = data.login_error;
 
-    $("#ModalForm").modal("show");
-
-    $("#ModalForm").on("shown.bs.modal", function () {
-      if (error[0] == "email") {
-        $("#email").addClass("is-invalid");
-        $("#email-feedback").text(error[1]).show();
-      } else {
-        $("#email").removeClass("is-invalid");
-        $("#email-feedback").hide();
+      if (error) {
+        if (error[0] == "email") {
+          $("#email").addClass("is-invalid");
+          $("#email-feedback").text(error[1]).show();
+        } else {
+          $("#email").removeClass("is-invalid");
+          $("#email-feedback").hide();
+        }
+        if (error[0] == "password") {
+          $("#password").addClass("is-invalid");
+          $("#password-feedback").text(error[1]).show();
+        } else {
+          $("#password").removeClass("is-invalid");
+          $("#password-feedback").hide();
+        }
       }
-      if (error[0] == "password") {
-        $("#password").addClass("is-invalid");
-        $("#password-feedback").text(error[1]).show();
-      } else {
-        $("#password").removeClass("is-invalid");
-        $("#password-feedback").hide();
-      }
+    }
+  }
+};
 
-      // set the email value to the email address that was entered
-      $("#email").val(email);
-
-      // clear the error data
-      data.login_error = [];
-    });
+// open the modal if there is a login error
+const open_modal = (data) => {
+  if (data) {
+    console.log(data);
+    if (data.login_error) {
+      console.log("open modal");
+      $("#ModalForm").modal("show");
+    }
   }
 };
 
@@ -107,31 +101,25 @@ const getUser = () => {
 
 // when the document is ready, run this
 $(document).ready(function () {
-<<<<<<< refs/remotes/origin/main
-<<<<<<< refs/remotes/origin/main
-  getUser().then(displayWelcome);
-  // getUser().then(login_error);
-  //   toggleActiveClass(); // ! DOESNT SEEM TO BE WORKING (with either version of the function...) ???
-});
->>>>>>> working on final assignment
-=======
-  getUser().then(displayWelcome).catch((error) =>  console.log(error));
-  $("#ModalForm").on("shown.bs.modal", function () {
-    getUser()
-      .then(login_error)
-      .catch((error) => {
-        console.log(error);
-      });
-  });
-});
->>>>>>> fixed login form and (some) error handling
-=======
-  // get the user data and pass promise to displayWelcome and login_error
+  // automatically open the login modal if there is a login error
+  // getUser().then(open_modal).catch((error) => console.log(error));
+  // replaced with below to reduce expensive http requests
+
+  // get the user data and pass promise to displayWelcome
   getUser()
     .then(displayWelcome)
+    .then(open_modal)
     .then(login_error)
     .catch((error) => {
       console.log(error);
     });
+
+  // display error in modal when its opened (if there is one)
+  // $("#ModalForm").on("shown.bs.modal", function () {
+  //   getUser()
+  //     .then(login_error)
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // });
 });
->>>>>>> fixed login, login form, rescue error msg, & pring

@@ -178,16 +178,18 @@ if (!isset($result)) {
     </div>
   </main>
 
+  <!-- <script src="src/js/rescue_validation.js"></script> --> <!-- //! COMMENT OUT -->
+
   <!-- php/jquery error message handling -->
   <?php if($_SESSION['pet_error_message'] != array()) { ?>
     <?php if($_SESSION['pet_error_message'][0]=='type') { ?>
       <script>
-        $('#animal-type').addClass('is-invalid');
+        $('#animal_type').addClass('is-invalid');
         $('#animal-type-feedback').text('<?php echo $_SESSION['pet_error_message'][1]; ?>').show();
       </script>
     <?php } else {?>
       <script>
-        $('#animal-type').removeClass('is-invalid');
+        $('#animal_type').removeClass('is-invalid');
         $("#animal-type-feedback").hide();
       </script>
     <?php } ?>

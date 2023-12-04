@@ -36,9 +36,10 @@ if ($animal_type == 0 || $animal_type == '') {
 } else if (empty($animal_description)) {
   $error_message[0] = 'description';
   $error_message[1] = 'Animal description cannot be empty.';
-} else if (empty($animal_price))
+} else if (empty($animal_price)) {
   $error_message[0] = 'price';
   $error_message[1] = 'Animal price cannot be empty.';
+}
 
 
 // if there is an error store the error message and animal data in the session
