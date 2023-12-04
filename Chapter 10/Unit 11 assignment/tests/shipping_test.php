@@ -160,13 +160,168 @@ if (!isset($order_number)) {
     </div>
   </main>
 
-  <!-- unset the saved session shipping data and error messages (interferes with JS...) -->
-  <!-- <?php unset($_SESSION['shipping_data']); ?>
-  <?php unset($_SESSION['label_error_message']); ?> -->
+  <!-- php/jquery error message handling -->
+  <?php if ($_SESSION['label_error_message'] != array()) { ?>
+    <?php if ($_SESSION['label_error_message'][0] == 'first') { ?>
+      <script>
+        $(document).ready(function() {
+          $('#first-name').addClass('is-invalid');
+          $('#first_name_error').text('<?php echo $_SESSION['label_error_message'][1]; ?>').show();
+        });
+      </script>
+    <?php } else { ?>
+      <script>
+        $(document).ready(function() {
+          $('#first-name').removeClass('is-invalid');
+          $("#first_name_error").hide();
+        });
+      </script>
+    <?php } ?>
+    <?php if ($_SESSION['label_error_message'][0] == 'last') { ?>
+      <script>
+        $(document).ready(function() {
+          $('#last-name').addClass('is-invalid');
+          $('#last_name_error').text('<?php echo $_SESSION['label_error_message'][1]; ?>').show();
+        });
+      </script>
+    <?php } else { ?>
+      <script>
+        $(document).ready(function() {
+          $('#last-name').removeClass('is-invalid');
+          $("#last_name_error").hide();
+        });
+      </script>
+    <?php } ?>
+    <?php if ($_SESSION['label_error_message'][0] == 'address') { ?>
+      <script>
+        $(document).ready(function() {
+          $('#address-one').addClass('is-invalid');
+          $('#address_one_error').text('<?php echo $_SESSION['label_error_message'][1]; ?>').show();
+        });
+      </script>
+    <?php } else { ?>
+      <script>
+        $(document).ready(function() {
+          $('#address-one').removeClass('is-invalid');
+          $("#address_one_error").hide();
+        });
+      </script>
+    <?php } ?>
+    <?php if ($_SESSION['label_error_message'][0] == 'city') { ?>
+      <script>
+        $(document).ready(function() {
+          $('#city').addClass('is-invalid');
+          $('#city_error').text('<?php echo $_SESSION['label_error_message'][1]; ?>').show();
+        });
+      </script>
+    <?php } else { ?>
+      <script>
+        $(document).ready(function() {
+          $('#city').removeClass('is-invalid');
+          $("#city_error").hide();
+        });
+      </script>
+    <?php } ?>
+    <?php if ($_SESSION['label_error_message'][0] == 'state') { ?>
+      <script>
+        $(document).ready(function() {
+          $('#state').addClass('is-invalid');
+          $('#state_error').text('<?php echo $_SESSION['label_error_message'][1]; ?>').show();
+        });
+      </script>
+    <?php } else { ?>
+      <script>
+        $(document).ready(function() {
+          $('#state').removeClass('is-invalid');
+          $("#state_error").hide();
+        });
+      </script>
+    <?php } ?>
+    <?php if ($_SESSION['label_error_message'][0] == 'zip') { ?>
+      <script>
+        $(document).ready(function() {
+          $('#zip-code').addClass('is-invalid');
+          $('#zip_code_error').text('<?php echo $_SESSION['label_error_message'][1]; ?>').show();
+        });
+      </script>
+    <?php } else { ?>
+      <script>
+        $(document).ready(function() {
+          $('#zip-code').removeClass('is-invalid');
+          $("#zip_code_error").hide();
+        });
+      </script>
+    <?php } ?>
+    <?php if ($_SESSION['label_error_message'][0] == 'date') { ?>
+      <script>
+        $(document).ready(function() {
+          $('#ship-date').addClass('is-invalid');
+          $('#ship_date_error').text('<?php echo $_SESSION['label_error_message'][1]; ?>').show();
+        });
+      </script>
+    <?php } else { ?>
+      <script>
+        $(document).ready(function() {
+          $('#ship-date').removeClass('is-invalid');
+          $("#ship_date_error").hide();
+        });
+      </script>
+    <?php } ?>
+    <?php if ($_SESSION['label_error_message'][0] == 'dimensions') { ?>
+      <script>
+        $(document).ready(function() {
+          $('#package-dimensions').addClass('is-invalid');
+          $('#package_dimensions_error').text('<?php echo $_SESSION['label_error_message'][1]; ?>').show();
+        });
+      </script>
+    <?php } else { ?>
+      <script>
+        $(document).ready(function() {
+          $('#package-dimensions').removeClass('is-invalid');
+          $("#package_dimensions_error").hide();
+        });
+      </script>
+    <?php } ?>
+    <?php if ($_SESSION['label_error_message'][0] == 'weight') { ?>
+      <script>
+        $(document).ready(function() {
+          $('#package-weight').addClass('is-invalid');
+          $('#package_weight_error').text('<?php echo $_SESSION['label_error_message'][1]; ?>').show();
+        });
+      </script>
+    <?php } else { ?>
+      <script>
+        $(document).ready(function() {
+          $('#package-weight').removeClass('is-invalid');
+          $("#package_weight_error").hide();
+        });
+      </script>
+    <?php } ?>
+    <?php if ($_SESSION['label_error_message'][0] == 'number') { ?>
+      <script>
+        $(document).ready(function() {
+          $('#order-number').addClass('is-invalid');
+          $('#order_number_error').text('<?php echo $_SESSION['label_error_message'][1]; ?>').show();
+        });
+      </script>
+    <?php } else { ?>
+      <script>
+        $(document).ready(function() {
+          $('#order-number').removeClass('is-invalid');
+          $("#order_number_error").hide();
+        });
+      </script>
+    <?php } ?>
+  <?php } ?>
 
 
-  <script src="src/js/shipping_validation.js"></script>
-  <!-- // TODO: TROUBLESHOOT JS (?) -- not applying classes correctly? -->
+  <!-- unset the saved session shipping data and error messages -->
+  <?php unset($_SESSION['shipping_data']); ?>
+  <?php unset($_SESSION['label_error_message']); ?>
+
+
+  <!-- <script src="src/js/shipping_validation.js"></script> -->
+  <!-- // TODO: TROUBLESHOOT JS (?) -->
 
   <?php include 'src/html/footer.html'; ?>
 </body>
