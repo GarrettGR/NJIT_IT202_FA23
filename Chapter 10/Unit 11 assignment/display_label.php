@@ -101,40 +101,40 @@ function count_digit($number)
 }
 
 // validate input data
-if (!array_key_exists($state, $states)){
+if (!array_key_exists($state, $states)) {
   $error_message[0] = 'state';
   $error_message[1] = 'State must be a valid state abbreviation.';
-}else if (count_digit($zip_code) != 5){
+} else if (count_digit($zip_code) != 5) {
   $error_message[0] = 'zip';
   $error_message[1] = 'Zip code must be 5 digits.';
-}else if ($zip_code < 0){
+} else if ($zip_code < 0) {
   $error_message[0] = 'zip';
   $error_message[1] = 'Zip code must be positive.';
-}else if ($zip_code > 99999){
+} else if ($zip_code > 99999) {
   $error_message[0] = 'zip';
   $error_message[1] = 'Zip code must be less than 99999.';
-}else if ($package_weight > 150){
+} else if ($package_weight > 150) {
   $error_message[0] = 'weight';
   $error_message[1] = 'Weight must be less than 150 pounds.';
-}else if ($package_weight < 0){
+} else if ($package_weight < 0) {
   $error_message[0] = 'weight';
   $error_message[1] = 'Weight must be positive.';
-}else if ($length > 36){
+} else if ($length > 36) {
   $error_message[0] = 'dimensions';
   $error_message[1] = 'Length must be less than 36 inches.';
-}else if ($width > 36){
+} else if ($width > 36) {
   $error_message[0] = 'dimensions';
   $error_message[1] = 'Width must be less than 36 inches.';
-}else if ($height > 36){
+} else if ($height > 36) {
   $error_message[0] = 'dimensions';
   $error_message[1] = 'Height must be less than 36 inches.';
-}else if ($length < 0){
+} else if ($length < 0) {
   $error_message[0] = 'dimensions';
   $error_message[1] = 'Length must be positive.';
-}else if ($width < 0){
+} else if ($width < 0) {
   $error_message[0] = 'dimensions';
   $error_message[1] = 'Width must be positive.';
-}else if ($height < 0){
+} else if ($height < 0) {
   $error_message[0] = 'dimensions';
   $error_message[1] = 'Height must be positive.';
 }
@@ -165,8 +165,10 @@ if ($error_message != array()) {
         </form>
         <!-- <button onclick="window.location.href='src/php/edit_shipping.php' " class="btn btn-outline-secondary">Edit</button> -->
 
-        <!-- button to pring the label -->
-        <button onclick="window.print()" class="btn btn-outline-secondary">Print</button>
+        <!-- button to print the label -->
+        <button onclick="printDiv('label')" class="btn btn-outline-secondary">Print</button>
+        <!-- <button onclick="window.print()" class="btn btn-outline-secondary">Print</button> -->
+        
         <!-- button to create a new label -->
         <button onclick="window.location.href='shipping.php'" class="btn btn-outline-secondary">New Label</button>
         <!-- <button onclick="window.location.href='src/php/new_shipping.php'" class="btn btn-outline-secondary">New Label</button> -->
@@ -178,7 +180,7 @@ if ($error_message != array()) {
         <h5>Fill out this form to generate the shipping label!</h5>
       </div>
       <div class="row justify-content-sm-center pt-2">
-        <div class="label">
+        <div class="label" id="label">
           <h2>UPS Shipping Label</h2>
           <p class="address"><?php echo $address_one; ?></p>
           <?php if ($address_two) { ?>
@@ -200,6 +202,17 @@ if ($error_message != array()) {
         </div>
       </div>
   </main>
+
+  <script>
+    function printDiv(divId) {
+      var printContents = $('#' + divId).html();
+      var originalContents = $('body').html();
+      $('body').html(printContents);
+      window.print();
+      $('body').html(originalContents);
+    }
+  </script>
+
   <?php include 'src/html/footer.html'; ?>
 </body>
 

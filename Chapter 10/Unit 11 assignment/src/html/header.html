@@ -121,10 +121,11 @@
           <div class="myform bg-dark">
             <h1 class="text-center">Login Form</h1>
             <form action="src/php/login.php" method="POST">
+              <div class="text-danger pb-1" 
+              id="error-message"></div>
               <div class="mb-3 mt-4">
-                <div class="text-danger" id="error-message"></div>
-                <label for="email" class="form-label">Email address</label>
                 <div class="invalid-feedback" id="email-feedback"></div>
+                <label for="email" class="form-label">Email address</label>
                 <input
                   type="email"
                   class="login-form-control"
@@ -135,10 +136,10 @@
                 />
               </div>
               <div class="mb-3">
+                <div class="invalid-feedback" id="password-feedback"></div>
                 <label for="password" id="password-label" class="form-label"
                   >Password</label
                 >
-                <div class="invalid-feedback" id="password-feedback"></div>
                 <input
                   type="password"
                   class="login-form-control"
@@ -155,5 +156,5 @@
       </div>
     </div>
   </div>
-  <script src="src/js/login.js"></script>
+  <script src="src/js/login_data.js"></script>
 </header>
