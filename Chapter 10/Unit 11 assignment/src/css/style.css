@@ -1,3 +1,4 @@
+<<<<<<< refs/remotes/origin/main
 body {
 <<<<<<< refs/remotes/origin/main
 <<<<<<< refs/remotes/origin/main
@@ -12,6 +13,14 @@ body {
 }
 footer {
     padding-bottom: 20px;
+=======
+main {
+  padding-top: 68px;
+}
+footer {
+  padding-top: 20px;
+  padding-bottom: 20px;
+>>>>>>> working on error handling and form validation
 }
 .login {
     padding-right: .5em;
@@ -56,6 +65,7 @@ footer {
   border-radius: 0;
   border-bottom: 1px solid #fff;
 }
+<<<<<<< refs/remotes/origin/main
 .myform .btn {
   width: 100%;
   font-weight: 800;
@@ -67,4 +77,29 @@ footer {
   background-color: inherit;
   color: #fff;
   border-color: #fff;
+=======
+
+/* shipping label styling */
+.label {
+  border: 1px solid black;
+  padding: 10px;
+  width: 300px;
+  background-color: white;
+}
+
+.label h2 {
+  margin: 0;
+}
+
+.label p {
+  margin: 0;
+}
+
+.label .address {
+  font-weight: bold;
+}
+
+.label .city-state-zip {
+  margin-top: 10px;
+>>>>>>> working on error handling and form validation
 }

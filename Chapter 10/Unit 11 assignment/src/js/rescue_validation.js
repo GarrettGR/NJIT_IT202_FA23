@@ -11,6 +11,15 @@ $(document).ready(() => {
     }
   });
 
+  // check the value of the radio button, if it is "numeric" then show the placeholder "006", if it is "entire" then show the placeholder "BRD-006"
+  $(document).on("change", "input[name='override-radio']", function () {
+    if ($(this).val() == "numeric") {
+      $("#animal_code").attr("placeholder", "006");
+    } else {
+      $("#animal_code").attr("placeholder", "BRD-006");
+    }
+  });
+
   $("#rescue_form").on("submit", (event) => {
     let isValid = true;
 
@@ -31,7 +40,9 @@ $(document).ready(() => {
       if (animalCode.length < 4 || animalCode.length > 10) {
         isValid = false;
         $("#animal-code").addClass("is-invalid");
-        $("#animal-code-feedback").text("Animal code must be between 4 and 10 characters").show();
+        $("#animal-code-feedback")
+          .text("Animal code must be between 4 and 10 characters")
+          .show();
       } else {
         $("#animal-code").removeClass("is-invalid");
         $("#animal-code-feedback").hide();
@@ -43,7 +54,9 @@ $(document).ready(() => {
     if (animalName.length < 10 || animalName.length > 100) {
       isValid = false;
       $("#animal-name").addClass("is-invalid");
-      $("#animal-name-feedback").text("Animal name must be between 10 and 100 characters").show();
+      $("#animal-name-feedback")
+        .text("Animal name must be between 10 and 100 characters")
+        .show();
     } else {
       $("#animal-name").removeClass("is-invalid");
       $("#animal-name-feedback").hide();
@@ -54,7 +67,9 @@ $(document).ready(() => {
     if (animalDescription.length < 10 || animalDescription.length > 255) {
       isValid = false;
       $("#animal-description").addClass("is-invalid");
-      $("#animal-description-feedback").text("Animal description must be between 10 and 255 characters").show();
+      $("#animal-description-feedback")
+        .text("Animal description must be between 10 and 255 characters")
+        .show();
     } else {
       $("#animal-description").removeClass("is-invalid");
       $("#animal-description-feedback").hide();
@@ -65,7 +80,9 @@ $(document).ready(() => {
     if (animalPrice <= 0 || animalPrice > 100000) {
       isValid = false;
       $("#animal-price").addClass("is-invalid");
-      $("#animal-price-feedback").text("Animal price must be between $0 and $100,000").show();
+      $("#animal-price-feedback")
+        .text("Animal price must be between $0 and $100,000")
+        .show();
     } else {
       $("#animal-price").removeClass("is-invalid");
       $("#animal-price-feedback").hide();

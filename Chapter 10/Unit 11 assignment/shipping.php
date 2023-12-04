@@ -1,38 +1,74 @@
 <?php
 include_once('src/php/login_verify.php');
 
+//! WAS USED WHILE TROUBLESHOOTING; DEPRECATED BUT NOT YET REMOVED
+// check if the data can be unserialized
+function is_serialized($value){
+  $data = @unserialize($value);
+  return $data !== false || $value === 'b:0;';
+}
+
+// set the default values for session variables if they dont exist
+// if (!isset($_SESSION['shipping_data'])) {
+//   $_SESSION['shipping_data'] = array();
+// }
+// if (!isset($_SESSION['label_error_message'])) {
+//   $_SESSION['label_error_message'] = array();
+// }
+
+// get the data from the serialized array (if it exists)
+if ($_SESSION['shipping_data'] != '') {
+
+  // TODO: remove the serialized
+  // check if the data is serialized
+  if (is_serialized($_SESSION['shipping_data'])) {
+    $shipping_data = unserialize($_SESSION['shipping_data']);
+    $first_name = $shipping_data['first_name'];
+    $last_name = $shipping_data['last_name'];
+    $address_one = $shipping_data['address_one'];
+    $address_two = $shipping_data['address_two'];
+    $state = $shipping_data['state'];
+    $city = $shipping_data['city'];
+    $zip_code = $shipping_data['zip_code'];
+    $ship_date = $shipping_data['ship_date'];
+    $package_dimensions = $shipping_data['package_dimensions'];
+    $package_weight = $shipping_data['package_weight'];
+    $order_number = $shipping_data['order_number'];
+  }
+}
+
 if (!isset($first_name)) {
-    $first_name = '';
+  $first_name = '';
 }
 if (!isset($last_name)) {
-    $last_name = '';
+  $last_name = '';
 }
 if (!isset($address_one)) {
-    $address_one = '';
+  $address_one = '';
 }
 if (!isset($address_two)) {
-    $address_two = '';
+  $address_two = '';
 }
 if (!isset($state)) {
-    $state = '';
+  $state = '';
 }
 if (!isset($city)) {
-    $city = '';
+  $city = '';
 }
 if (!isset($zip_code)) {
-    $zip_code = '';
+  $zip_code = '';
 }
 if (!isset($ship_date)) {
-    $ship_date = '';
+  $ship_date = '';
 }
 if (!isset($package_dimensions)) {
-    $package_dimensions = '';
+  $package_dimensions = '';
 }
 if (!isset($package_weight)) {
-    $package_weight = '';
+  $package_weight = '';
 }
 if (!isset($order_number)) {
-    $order_number = '';
+  $order_number = '';
 }
 ?>
 
@@ -41,86 +77,110 @@ if (!isset($order_number)) {
 <?php include 'src/php/head.php'; ?>
 
 <body>
-    <?php include 'src/html/header.html'; ?>
-    <main class="bg-light text-dark">
-        <div class="row justify-content-md-center">
-            <div class="col-6">
-                <h1>Shipping</h1>
-                <h5>Fill out this form to generate the shipping label!</h5>
+  <?php include 'src/html/header.html'; ?>
+  <main class="bg-light text-dark">
+    <div class="row justify-content-sm-center">
+      <div class="col-8">
+        <h1>Shipping</h1>
+        <h5>Fill out this form to generate the shipping label!</h5>
 
-                <form action="display_label.php" method="post" name="shipping_form" id="rescue_form">
+        <form class="pt-2" action="display_label.php" method="post" name="shipping_form" id="rescue_form">
 
-                    <!-- error message -->
-                    <div class="text-danger" id="general_error"></div>
-
-                    <h2>Address Information: </h2>
-                    <div class="mb-3" id="first-name">
-                        <label for="first-name" class="form-label">First Name: </label>
-                        <div class="text-danger" id="first_name_error"></div>
-                        <input type="text" name="first-name" id="first-name" value="<?php echo htmlspecialchars($first_name); ?>">
-                    </div>
-                    <div class="mb-3" id="last-name">
-                        <label for="last-name" class="form-label">Last Name: </label>
-                        <div class="text-danger" id="last_name_error"></div>
-                        <input type="text" name="last-name" id="last-name" value="<?php echo htmlspecialchars($last_name); ?>">
-                    </div>
-                    <div class="mb-3" id="address-one">
-                        <label for="address-one" class="form-label">Address Line 1: </label>
-                        <div class="text-danger" id="address_one_error"></div>
-                        <input type="text" name="address-one" id="address-one" value="<?php echo htmlspecialchars($address_one); ?>">
-                    </div>
-                    <div class="mb-3" id="address-two">
-                        <label for="address-two" class="form-label">Address Line 2: </label>
-                        <div class="text-danger" id="address_two_error"></div>
-                        <input type="text" name="address-two" id="address-two" value="<?php echo htmlspecialchars($address_two); ?>">
-                    </div>
-                    <div>
-                        <label for="state" class="form-label">State (abbrev.): </label>
-                        <div class="text-danger" id="state_error"></div>
-                        <input type="text" name="state" id="state" value="<?php echo htmlspecialchars($state); ?>">
-                    </div>
-                    <div>
-                        <label for="city" class="form-label">City: </label>
-                        <div class="text-danger" id="city_error"></div>
-                        <input type="text" name="city" id="city" value="<?php echo htmlspecialchars($city); ?>">
-                    </div>
-                    <div>
-                        <label for="zip-code" class="form-label">Zip Code: </label>
-                        <div class="text-danger" id="zip_code_error"></div>
-                        <input type="number" name="zip-code" id="zip-code" value="<?php echo htmlspecialchars($zip_code); ?>">
-                    </div>
-
-                    <h2>Package Information: </h2>
-                    <div>
-                        <label for="ship-date" class="form-label">Ship Date: </label>
-                        <div class="text-danger" id="ship_date_error"></div>
-                        <input type="date" name="ship-date" id="ship-date" value="<?php echo htmlspecialchars($ship_date); ?>">
-                    </div>
-                    <div>
-                        <label for="package-dimensions" class="form-label">Package Dimensions (l,w,h): </label>
-                        <div class="text-danger" id="package_dimensions_error"></div>
-                        <input type="text" name="package-dimensions" id="package-dimensions" value="<?php echo htmlspecialchars($package_dimensions); ?>">
-                    </div>
-                    <div>
-                        <label for="package-weight" class="form-label">Package Weight: </label>
-                        <div class="text-danger" id="package_weight_error"></div>
-                        <input type="text" name="package-weight" id="package-weight" value="<?php echo htmlspecialchars($package_weight); ?>">
-                    </div>
-                    <div>
-                        <label for="order-number" class="form-label">Order Number: </label>
-                        <div class="text-danger" id="order_number_error"></div>
-                        <input type="text" name="order-number" id="order-number" value="<?php echo htmlspecialchars($order_number); ?>">
-                    </div>
-
-                    <div>
-                        <input type="submit" value="Create Label">
-                    </div>
-                </form>
+          <!-- error message -->
+          <?php if (!empty($_SESSION['label_error_message'])) { ?>
+            <div class="text-danger mt-2" id="general_error">
+              <p> <?php echo $_SESSION['label_error_message'] ?> </p>
             </div>
-        </div>
-    </main>
-    <script src="src/js/shipping_validation.js"></script>
-    <?php include 'src/html/footer.html'; ?>
+          <?php } ?>
+
+
+
+          <h2 class="mt-2">Address Information: </h2>
+          <div class="row">
+            <div class="col-6">
+              <div class="mb-3" id="first-name">
+                <label for="first-name" class="form-label">First Name: </label>
+                <div class="invalid-feedback text-danger" id="first_name_error"></div>
+                <input type="text" class="form-control" name="first-name" id="first-name" value="<?php echo htmlspecialchars($first_name); ?>">
+              </div>
+              <div class="mb-3" id="address-one">
+                <label for="address-one" class="form-label">Address Line 1: </label>
+                <div class="invalid-feedback text-danger" id="address_one_error"></div>
+                <input type="text" class="form-control" name="address-one" id="address-one" value="<?php echo htmlspecialchars($address_one); ?>">
+              </div>
+              <div class="mb-3" id="city">
+                <label for="city" class="form-label">City: </label>
+                <div class="invalid-feedback text-danger" id="city_error"></div>
+                <input type="text" class="form-control" name="city" id="city" value="<?php echo htmlspecialchars($city); ?>">
+              </div>
+              <div class="mb-3" id="zip-code">
+                <label for="zip-code" class="form-label">Zip Code: </label>
+                <div class="invalid-feedback text-danger" id="zip_code_error"></div>
+                <input type="number" class="form-control" name="zip-code" id="zip-code" placeholder='Ex. "08844"' value="<?php echo htmlspecialchars($zip_code); ?>">
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="mb-3" id="last-name">
+                <label for="last-name" class="form-label">Last Name: </label>
+                <div class="invalid-feedback text-danger" id="last_name_error"></div>
+                <input type="text" class="form-control" name="last-name" id="last-name" value="<?php echo htmlspecialchars($last_name); ?>">
+              </div>
+              <div class="mb-3" id="address-two">
+                <label for="address-two" class="form-label">Address Line 2: </label>
+                <div class="invalid-feedback text-danger" id="address_two_error"></div>
+                <input type="text" class="form-control" name="address-two" id="address-two" value="<?php echo htmlspecialchars($address_two); ?>">
+              </div>
+              <div class="mb-3" id="state">
+                <label for="state" class="form-label">State (abbrev.): </label>
+                <div class="invalid-feedback text-danger" id="state_error"></div>
+                <input type="text" class="form-control" name="state" id="state" placeholder='Ex. "NJ"' value="<?php echo htmlspecialchars($state); ?>">
+              </div>
+            </div>
+          </div>
+
+          <h2 class="mt-2">Package Information: </h2>
+          <div class="row">
+            <div class="col-6">
+              <div class="mb-3" id="ship-date">
+                <label for="ship-date" class="form-label">Ship Date: </label>
+                <div class="invalid-feedback text-danger" id="ship_date_error"></div>
+                <input type="date" class="form-control" name="ship-date" id="ship-date" value="<?php echo htmlspecialchars($ship_date); ?>">
+              </div>
+              <div class="mb-3" id="package-dimensions">
+                <label for="package-dimensions" class="form-label">Package Dimensions: </label>
+                <div class="invalid-feedback text-danger" id="package_dimensions_error"></div>
+                <input type="text" class="form-control" name="package-dimensions" id="package-dimensions" placeholder='Ex. "L,W,H"' value="<?php echo htmlspecialchars($package_dimensions); ?>">
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="mb-3" id="package-weight">
+                <label for="package-weight" class="form-label">Package Weight: </label>
+                <div class="invalid-feedback text-danger" id="package_weight_error"></div>
+                <input type="text" class="form-control" name="package-weight" id="package-weight" value="<?php echo htmlspecialchars($package_weight); ?>">
+              </div>
+              <div class="mb-3" id="order-number">
+                <label for="order-number" class="form-label">Order Number: </label>
+                <div class="invalid-feedback text-danger" id="order_number_error"></div>
+                <input type="text" class="form-control" name="order-number" id="order-number" value="<?php echo htmlspecialchars($order_number); ?>">
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-1">
+            <input type="submit" value="Create Label">
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <!-- unset the saved session shipping data and error messages -->
+  <?php unset($_SESSION['shipping_data']); ?>
+  <?php unset($_SESSION['label_error_message']); ?>
+
+
+  <script src="src/js/shipping_validation.js"></script>
+  <?php include 'src/html/footer.html'; ?>
 </body>
 
 </html>
