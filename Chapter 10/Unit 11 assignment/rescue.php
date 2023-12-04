@@ -178,7 +178,7 @@ if (!isset($result)) {
     </div>
   </main>
 
-  <!-- <script src="src/js/rescue_validation.js"></script> --> <!-- //! COMMENT OUT -->
+  <script src="src/js/rescue_validation.js"></script>
 
   <!-- php/jquery error message handling -->
   <?php if($_SESSION['pet_error_message'] != array()) { ?>
