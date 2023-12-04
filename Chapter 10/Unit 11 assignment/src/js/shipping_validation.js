@@ -1,4 +1,4 @@
-//! THIS IS NOT CURRENTLY BEING USED -- IT IS JUST A PROOF OF CONCEPT
+//! NOT APPLYING 'is-invalid' CLASS TO THE INPUTS
 
 // the actual error handling is all handled server side, the client side just displays the errors
 
