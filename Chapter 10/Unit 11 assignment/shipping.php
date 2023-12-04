@@ -11,18 +11,18 @@ if (!isset($_SESSION['label_error_message'])) {
 
 // get the data from the serialized array (if it exists)
 if ($_SESSION['shipping_data'] != array()) {
-    $shipping_data = $_SESSION['shipping_data'];
-    $first_name = $shipping_data['first_name'];
-    $last_name = $shipping_data['last_name'];
-    $address_one = $shipping_data['address_one'];
-    $address_two = $shipping_data['address_two'];
-    $state = $shipping_data['state'];
-    $city = $shipping_data['city'];
-    $zip_code = $shipping_data['zip_code'];
-    $ship_date = $shipping_data['ship_date'];
-    $package_dimensions = $shipping_data['package_dimensions'];
-    $package_weight = $shipping_data['package_weight'];
-    $order_number = $shipping_data['order_number'];
+  $shipping_data = $_SESSION['shipping_data'];
+  $first_name = $shipping_data['first_name'];
+  $last_name = $shipping_data['last_name'];
+  $address_one = $shipping_data['address_one'];
+  $address_two = $shipping_data['address_two'];
+  $state = $shipping_data['state'];
+  $city = $shipping_data['city'];
+  $zip_code = $shipping_data['zip_code'];
+  $ship_date = $shipping_data['ship_date'];
+  $package_dimensions = $shipping_data['package_dimensions'];
+  $package_weight = $shipping_data['package_weight'];
+  $order_number = $shipping_data['order_number'];
 }
 
 if (!isset($first_name)) {
@@ -75,7 +75,7 @@ if (!isset($order_number)) {
         <form class="pt-2" action="display_label.php" method="post" name="shipping_form" id="rescue_form">
 
           <!-- error message -->
-          <?php if ($_SESSION['label_error_message']!=array()) { ?>
+          <?php if ($_SESSION['label_error_message'] != array()) { ?>
             <div class="text-danger mt-2" id="general_error">
               <p> <?php echo $_SESSION['label_error_message'][1] ?> </p>
             </div>
@@ -161,115 +161,155 @@ if (!isset($order_number)) {
   </main>
 
   <!-- php/jquery error message handling -->
-  <?php if ($_SESSION['label_error_message']!=array()) { ?>
-    <?php if ($_SESSION['label_error_message'][0]=='first') { ?>
+  <?php if ($_SESSION['label_error_message'] != array()) { ?>
+    <?php if ($_SESSION['label_error_message'][0] == 'first') { ?>
       <script>
-        $('#first-name').addClass('is-invalid');
-        $('#first_name_error').text('<?php echo $_SESSION['label_error_message'][1]; ?>').show();
+        $(document).ready(function() {
+          $('#first-name').addClass('is-invalid');
+          $('#first_name_error').text('<?php echo $_SESSION['label_error_message'][1]; ?>').show();
+        });
       </script>
-    <?php } else {?>
+    <?php } else { ?>
       <script>
-        $('#first-name').removeClass('is-invalid');
-        $("#first_name_error").hide();
-      </script>
-    <?php } ?>
-    <?php if ($_SESSION['label_error_message'][0]=='last') { ?>
-      <script>
-        $('#last-name').addClass('is-invalid');
-        $('#last_name_error').text('<?php echo $_SESSION['label_error_message'][1]; ?>').show();
-      </script>
-    <?php } else {?>
-      <script>
-        $('#last-name').removeClass('is-invalid');
-        $("#last_name_error").hide();
+        $(document).ready(function() {
+          $('#first-name').removeClass('is-invalid');
+          $("#first_name_error").hide();
+        });
       </script>
     <?php } ?>
-    <?php if ($_SESSION['label_error_message'][0]=='address') { ?>
+    <?php if ($_SESSION['label_error_message'][0] == 'last') { ?>
       <script>
-        $('#address-one').addClass('is-invalid');
-        $('#address_one_error').text('<?php echo $_SESSION['label_error_message'][1]; ?>').show();
+        $(document).ready(function() {
+          $('#last-name').addClass('is-invalid');
+          $('#last_name_error').text('<?php echo $_SESSION['label_error_message'][1]; ?>').show();
+        });
       </script>
-    <?php } else {?>
+    <?php } else { ?>
       <script>
-        $('#address-one').removeClass('is-invalid');
-        $("#address_one_error").hide();
-      </script>
-    <?php } ?>
-    <?php if($_SESSION['label_error_message'][0]=='city') { ?>
-      <script>
-        $('#city').addClass('is-invalid');
-        $('#city_error').text('<?php echo $_SESSION['label_error_message'][1]; ?>').show();
-      </script>
-    <?php } else {?>
-      <script>
-        $('#city').removeClass('is-invalid');
-        $("#city_error").hide();
+        $(document).ready(function() {
+          $('#last-name').removeClass('is-invalid');
+          $("#last_name_error").hide();
+        });
       </script>
     <?php } ?>
-    <?php if($_SESSION['label_error_message'][0]=='state') { ?>
+    <?php if ($_SESSION['label_error_message'][0] == 'address') { ?>
       <script>
-        $('#state').addClass('is-invalid');
-        $('#state_error').text('<?php echo $_SESSION['label_error_message'][1]; ?>').show();
+        $(document).ready(function() {
+          $('#address-one').addClass('is-invalid');
+          $('#address_one_error').text('<?php echo $_SESSION['label_error_message'][1]; ?>').show();
+        });
       </script>
-    <?php } else {?>
+    <?php } else { ?>
       <script>
-        $('#state').removeClass('is-invalid');
-        $("#state_error").hide();
-      </script>
-    <?php } ?>
-    <?php if($_SESSION['label_error_message'][0]=='zip') { ?>
-      <script>
-        $('#zip-code').addClass('is-invalid');
-        $('#zip_code_error').text('<?php echo $_SESSION['label_error_message'][1]; ?>').show();
-      </script>
-    <?php } else {?>
-      <script>
-        $('#zip-code').removeClass('is-invalid');
-        $("#zip_code_error").hide();
+        $(document).ready(function() {
+          $('#address-one').removeClass('is-invalid');
+          $("#address_one_error").hide();
+        });
       </script>
     <?php } ?>
-    <?php if($_SESSION['label_error_message'][0]=='date') { ?>
+    <?php if ($_SESSION['label_error_message'][0] == 'city') { ?>
       <script>
-        $('#ship-date').addClass('is-invalid');
-        $('#ship_date_error').text('<?php echo $_SESSION['label_error_message'][1]; ?>').show();
+        $(document).ready(function() {
+          $('#city').addClass('is-invalid');
+          $('#city_error').text('<?php echo $_SESSION['label_error_message'][1]; ?>').show();
+        });
       </script>
-    <?php } else {?>
+    <?php } else { ?>
       <script>
-        $('#ship-date').removeClass('is-invalid');
-        $("#ship_date_error").hide();
-      </script>
-    <?php } ?>
-    <?php if($_SESSION['label_error_message'][0]=='dimensions') { ?>
-      <script>
-        $('#package-dimensions').addClass('is-invalid');
-        $('#package_dimensions_error').text('<?php echo $_SESSION['label_error_message'][1]; ?>').show();
-      </script>
-    <?php } else {?>
-      <script>
-        $('#package-dimensions').removeClass('is-invalid');
-        $("#package_dimensions_error").hide();
+        $(document).ready(function() {
+          $('#city').removeClass('is-invalid');
+          $("#city_error").hide();
+        });
       </script>
     <?php } ?>
-    <?php if($_SESSION['label_error_message'][0]=='weight') { ?>
+    <?php if ($_SESSION['label_error_message'][0] == 'state') { ?>
       <script>
-        $('#package-weight').addClass('is-invalid');
-        $('#package_weight_error').text('<?php echo $_SESSION['label_error_message'][1]; ?>').show();
+        $(document).ready(function() {
+          $('#state').addClass('is-invalid');
+          $('#state_error').text('<?php echo $_SESSION['label_error_message'][1]; ?>').show();
+        });
       </script>
-    <?php } else {?>
-      <script> 
-        $('#package-weight').removeClass('is-invalid');
-        $("#package_weight_error").hide();
+    <?php } else { ?>
+      <script>
+        $(document).ready(function() {
+          $('#state').removeClass('is-invalid');
+          $("#state_error").hide();
+        });
       </script>
     <?php } ?>
-    <?php if($_SESSION['label_error_message'][0]=='number') { ?>
+    <?php if ($_SESSION['label_error_message'][0] == 'zip') { ?>
       <script>
-        $('#order-number').addClass('is-invalid');
-        $('#order_number_error').text('<?php echo $_SESSION['label_error_message'][1]; ?>').show();
+        $(document).ready(function() {
+          $('#zip-code').addClass('is-invalid');
+          $('#zip_code_error').text('<?php echo $_SESSION['label_error_message'][1]; ?>').show();
+        });
       </script>
-    <?php } else {?>
+    <?php } else { ?>
       <script>
-        $('#order-number').removeClass('is-invalid');
-        $("#order_number_error").hide();
+        $(document).ready(function() {
+          $('#zip-code').removeClass('is-invalid');
+          $("#zip_code_error").hide();
+        });
+      </script>
+    <?php } ?>
+    <?php if ($_SESSION['label_error_message'][0] == 'date') { ?>
+      <script>
+        $(document).ready(function() {
+          $('#ship-date').addClass('is-invalid');
+          $('#ship_date_error').text('<?php echo $_SESSION['label_error_message'][1]; ?>').show();
+        });
+      </script>
+    <?php } else { ?>
+      <script>
+        $(document).ready(function() {
+          $('#ship-date').removeClass('is-invalid');
+          $("#ship_date_error").hide();
+        });
+      </script>
+    <?php } ?>
+    <?php if ($_SESSION['label_error_message'][0] == 'dimensions') { ?>
+      <script>
+        $(document).ready(function() {
+          $('#package-dimensions').addClass('is-invalid');
+          $('#package_dimensions_error').text('<?php echo $_SESSION['label_error_message'][1]; ?>').show();
+        });
+      </script>
+    <?php } else { ?>
+      <script>
+        $(document).ready(function() {
+          $('#package-dimensions').removeClass('is-invalid');
+          $("#package_dimensions_error").hide();
+        });
+      </script>
+    <?php } ?>
+    <?php if ($_SESSION['label_error_message'][0] == 'weight') { ?>
+      <script>
+        $(document).ready(function() {
+          $('#package-weight').addClass('is-invalid');
+          $('#package_weight_error').text('<?php echo $_SESSION['label_error_message'][1]; ?>').show();
+        });
+      </script>
+    <?php } else { ?>
+      <script>
+        $(document).ready(function() {
+          $('#package-weight').removeClass('is-invalid');
+          $("#package_weight_error").hide();
+        });
+      </script>
+    <?php } ?>
+    <?php if ($_SESSION['label_error_message'][0] == 'number') { ?>
+      <script>
+        $(document).ready(function() {
+          $('#order-number').addClass('is-invalid');
+          $('#order_number_error').text('<?php echo $_SESSION['label_error_message'][1]; ?>').show();
+        });
+      </script>
+    <?php } else { ?>
+      <script>
+        $(document).ready(function() {
+          $('#order-number').removeClass('is-invalid');
+          $("#order_number_error").hide();
+        });
       </script>
     <?php } ?>
   <?php } ?>
@@ -280,7 +320,9 @@ if (!isset($order_number)) {
   <?php unset($_SESSION['label_error_message']); ?>
 
 
-  <script src="src/js/shipping_validation.js"></script>
+  <!-- <script src="src/js/shipping_validation.js"></script> -->
+  <!-- // TODO: TROUBLESHOOT JS (?) -->
+
   <?php include 'src/html/footer.html'; ?>
 </body>
 
