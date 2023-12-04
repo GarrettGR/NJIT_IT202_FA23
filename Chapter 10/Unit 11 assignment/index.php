@@ -9,7 +9,7 @@
             <div class="col-6">
                 <h1 id="description" style="text-align:center; padding-top:0em">Family owned for over 30 years!</h1>
                 <figure>
-                    <img src="images/pet-store-header.jpg" alt="pet store header" class="img-fluid">
+                    <img src="src/img/pet-store-header.jpg" alt="pet store header" class="img-fluid">
                 </figure>
             </div>
             <div class="col-6">
@@ -27,7 +27,7 @@
         <div class="row">
             <div class="col-3">
                 <figure>
-                    <img src="images\pet-food-1.jpg" alt="pet foods" class="img-fluid">
+                    <img src="src/img\pet-food-1.jpg" alt="pet foods" class="img-fluid">
                 </figure>
             </div>
             <div class="col-3">
@@ -35,7 +35,7 @@
             </div>
             <div class="col-3">
                 <figure>
-                    <img src="images\pet-food-0.jpg" alt="pet foods" class="img-fluid">
+                    <img src="src/img\pet-food-0.jpg" alt="pet foods" class="img-fluid">
                 </figure>
             </div>
             <div class="col-3">
@@ -46,7 +46,7 @@
         <div class="row">
             <div class="col-3">
                 <figure>
-                    <img src="images\pet-bird.jpg" alt="pet bird" class="img-fluid">
+                    <img src="src/img\pet-bird.jpg" alt="pet bird" class="img-fluid">
                 </figure>
             </div>
             <div class="col-3">
@@ -54,7 +54,7 @@
             </div>
             <div class="col-3">
                 <figure>
-                    <img src="images\pet-puppy.jpg" alt="pet puppy" class="img-fluid">
+                    <img src="src/img\pet-puppy.jpg" alt="pet puppy" class="img-fluid">
                 </figure>
             </div>
             <div class="col-3">
@@ -65,7 +65,7 @@
         <div class="row">
             <div class="col-3 d-flex">
                 <figure>
-                    <img src="images\vet-services-0.jpg" alt="veterinatian services" class="img-fluid">
+                    <img src="src/img\vet-services-0.jpg" alt="veterinatian services" class="img-fluid">
                 </figure>
             </div>
             <div class="col-3">
@@ -73,7 +73,7 @@
             </div>
             <div class="col-3">
                 <figure>
-                    <img src="images\vet-services-1.jpg" alt="veterinatian services" class="img-fluid">
+                    <img src="src/img\vet-services-1.jpg" alt="veterinatian services" class="img-fluid">
                 </figure>
             </div>
             <div class="col-3">
@@ -83,7 +83,7 @@
         <div class="row">
             <div class="col-3">
                 <figure>
-                    <img src="images\boarding-services-0.jpg" alt="boarding services" class="img-fluid">
+                    <img src="src/img\boarding-services-0.jpg" alt="boarding services" class="img-fluid">
                 </figure>
             </div>
             <div class="col-3">
@@ -91,7 +91,7 @@
             </div>
             <div class="col-3">
                 <figure>
-                    <img src="images/boarding-services-1.jpg" alt="boarding services" class="img-fluid">
+                    <img src="src/img/boarding-services-1.jpg" alt="boarding services" class="img-fluid">
                 </figure>
             </div>
             <div class="col-3">

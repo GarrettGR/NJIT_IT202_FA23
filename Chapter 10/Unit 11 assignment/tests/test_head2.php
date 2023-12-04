@@ -23,8 +23,8 @@ if (session_status() == PHP_SESSION_NONE) {
   <meta name="keywords" content="Pet, Store, Pet Store" />
 
   <!-- link to favicons for tab preview -->
-  <link rel="icon" href="images\light-icon.png" type="image/x-icon" media="(prefers-color-scheme: dark)" />
-  <link rel="icon" href="images\dark-icon.png" type="image/x-icon" media="(prefers-color-scheme: light)" />
+  <link rel="icon" href="src/img\light-icon.png" type="image/x-icon" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" href="src/img\dark-icon.png" type="image/x-icon" media="(prefers-color-scheme: light)" />
 
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">

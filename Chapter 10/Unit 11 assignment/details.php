@@ -39,11 +39,15 @@ $statement->closeCursor();
           <p><?php echo $animal['price']; ?></p>
         </div>
         <div class="col-auto" id="display">
-          <!-- <img class="img-fluid" src="src/img/animals/<?php echo $animal['breadCode']; ?>.jpg" alt="<?php echo $animal['breadName']; ?>"> -->
 
-          <!-- access one of the photos from typicode since I don't have any photos of animals -->
+        <?php if (file_exists("src/img/animals/{$animal['breadCode']}.jpg")) : ?>
+          <img class="img-fluid" src="src/img/animals/<?php echo $animal['breadCode']; ?>.jpg" alt="<?php echo $animal['breadName']; ?>">
+        <?php else : ?>
+          <!-- access one of the photos from typicode since i don't have photos of all the animals -->
           <input type="hidden" id="breadID" value="<?php echo $animal['breadID']; ?>">
           <script src="src/js/display_image.js"></script>
+        <?php endif; ?>
+
         </div>
       <?php endif; ?>
     </div>
