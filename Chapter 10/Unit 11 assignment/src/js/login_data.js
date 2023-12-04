@@ -51,32 +51,22 @@ const displayWelcome = (data) => {
 const login_error = (data) => {
   if (data.login_error) {
     let error = data.login_error;
-    if (error[0]) {
-      // show the modal if there is an error
-      $("#loginModal").modal("show");
-
-      // TODO: remove any existing error classes
-
-      // based on the error code, add the error class to the appropriate label
-      if (error[0] == 1) {
-        $("#login-error").html(error[1]);
-        $("#email-label").addClass("text-danger");
-        $("#password-label").addClass("text-danger");
-      } else if (error[0] == 2) {
-        $("#login-error").html(error[1]);
-        $("#email-label").addClass("text-danger");
-      } else if (error[0] == 3) {
-        $("#login-error").html(error[1]);
-        $("#email-label").addClass("text-danger");
-      } else if (error[0] == 4) {
-        $("#login-error").html(error[1]);
-        $("#password-label").addClass("text-danger");
+    
+    if (error) {
+      if (error[0] == "email") {
+        $("#email").addClass("is-invalid");
+        $("#email-feedback").text(error[1]).show();
+      } else {
+        $("#email").removeClass("is-invalid");
+        $("#email-feedback").hide();
       }
-    } else {
-      // TODO: if there is no error, remove the error class from the labels
-
-      // remove any error message text
-      $("#login-error").html("");
+      if (error[0] == "password") {
+        $("#password").addClass("is-invalid");
+        $("#password-feedback").text(error[1]).show();
+      } else {
+        $("#password").removeClass("is-invalid");
+        $("#password-feedback").hide();
+      }
     }
   }
 };
@@ -90,38 +80,18 @@ const getUser = () => {
       return response.json();
     })
     .catch((error) => {
-      console.log(error);
+      console.error(error);
+      throw error;
     });
 };
 
-// const toggleActiveClass = () => {
-//   const navLinks = document.querySelectorAll(".navbar-nav .nav-link");
-//   const loc = window.location.href;
-
-//   navLinks.forEach((link) => {
-//     if (loc.includes(link.getAttribute("href"))) {
-//       link.classList.toggle("active");
-//     }
-//   });
-// };
-
-// const toggleActiveClass = () => {
-//   const navLinks = document.querySelectorAll(".navbar-nav .nav-link");
-//   const loc = window.location.pathname; // Use pathname instead of href
-
-//   navLinks.forEach((link) => {
-//     // Remove "active" class from all links
-//     link.classList.remove("active");
-
-//     // Add "active" class to the link that matches the current path
-//     if (loc === link.getAttribute("href")) {
-//       link.classList.add("active");
-//     }
-//   });
-// };
-
 $(document).ready(function () {
-  getUser().then(displayWelcome);
-  // getUser().then(login_error);
-  //   toggleActiveClass(); // ! DOESNT SEEM TO BE WORKING (with either version of the function...) ???
+  getUser().then(displayWelcome).catch((error) =>  console.log(error));
+  $("#ModalForm").on("shown.bs.modal", function () {
+    getUser()
+      .then(login_error)
+      .catch((error) => {
+        console.log(error);
+      });
+  });
 });

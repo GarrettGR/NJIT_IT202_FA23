@@ -53,10 +53,9 @@
             >
           </li>
           <li class="nav-item">
-            <a id="rescue-link" class="nav-link disabled" aria-disabled="true"
-              >
+            <a id="rescue-link" class="nav-link disabled" aria-disabled="true">
               Rescue
-              </a>
+            </a>
           </li>
           <li class="nav-item">
             <a
@@ -123,8 +122,9 @@
             <h1 class="text-center">Login Form</h1>
             <form action="src/php/login.php" method="POST">
               <div class="mb-3 mt-4">
-                <div class="error-message" id="error-message"></div>
+                <div class="text-danger" id="error-message"></div>
                 <label for="email" class="form-label">Email address</label>
+                <div class="invalid-feedback" id="email-feedback"></div>
                 <input
                   type="email"
                   class="login-form-control"
@@ -135,8 +135,10 @@
                 />
               </div>
               <div class="mb-3">
-                <label for="password"
-                id="password-label" class="form-label">Password</label>
+                <label for="password" id="password-label" class="form-label"
+                  >Password</label
+                >
+                <div class="invalid-feedback" id="password-feedback"></div>
                 <input
                   type="password"
                   class="login-form-control"
@@ -145,6 +147,7 @@
                   required
                 />
               </div>
+              <input type="hidden" name="action" value="login" />
               <button type="submit" class="btn btn-light mt-3">LOGIN</button>
             </form>
           </div>
@@ -152,4 +155,5 @@
       </div>
     </div>
   </div>
+  <script src="src/js/login.js"></script>
 </header>

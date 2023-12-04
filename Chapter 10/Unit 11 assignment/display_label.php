@@ -15,10 +15,10 @@ $package_weight = filter_input(INPUT_POST, 'package-weight');
 $order_number = filter_input(INPUT_POST, 'order-number');
 
 // clear error message and shipping data
-$error_message = '';
-$_SESSION['label_error_message'] = '';
+$error_message = array();
+$_SESSION['label_error_message'] = array();
 $shipping_data = array();
-$_SESSION['shipping_data'] = '';
+$_SESSION['shipping_data'] = array();
 
 // store the data in a serialized array in the session
 $shipping_data = array(
@@ -36,32 +36,42 @@ $shipping_data = array(
 );
 
 // make sure no fields are empty
-if (empty($first_name))
-  $error_message = 'First name cannot be empty.';
-else if (empty($last_name))
-  $error_message = 'Last name cannot be empty.';
-else if (empty($address_one))
-  $error_message = 'Address 1 cannot be empty.';
-  else if (empty($city))
-  $error_message = 'City cannot be empty.';
-else if (empty($state))
-  $error_message = 'State cannot be empty.';
-else if (empty($zip_code))
-  $error_message = 'Zip code cannot be empty.';
-else if (empty($ship_date))
-  $error_message = 'Ship date cannot be empty.';
-else if (empty($package_dimensions))
-  $error_message = 'Package dimensions cannot be empty.';
-else if (empty($package_weight))
-  $error_message = 'Package weight cannot be empty.';
-else if (empty($order_number))
-  $error_message = 'Order number cannot be empty.';
-
+if (empty($first_name)) {
+  $error_message[0] = 'first';
+  $error_message[1] = 'First name cannot be empty.';
+} else if (empty($last_name)) {
+  $error_message[0] = 'last';
+  $error_message[1] = 'Last name cannot be empty.';
+} else if (empty($address_one)) {
+  $error_message[0] = 'address';
+  $error_message[1] = 'Address 1 cannot be empty.';
+} else if (empty($city)) {
+  $error_message[0] = 'city';
+  $error_message[1] = 'City cannot be empty.';
+} else if (empty($state)) {
+  $error_message[0] = 'state';
+  $error_message[1] = 'State cannot be empty.';
+} else if (empty($zip_code)) {
+  $error_message[0] = 'zip';
+  $error_message[1] = 'Zip code cannot be empty.';
+} else if (empty($ship_date)) {
+  $error_message[0] = 'date';
+  $error_message[1] = 'Ship date cannot be empty.';
+} else if (empty($package_dimensions)) {
+  $error_message[0] = 'dimensions';
+  $error_message[1] = 'Package dimensions cannot be empty.';
+} else if (empty($package_weight)) {
+  $error_message[0] = 'weight';
+  $error_message[1] = 'Package weight cannot be empty.';
+} else if (empty($order_number)) {
+  $error_message[0] = 'number';
+  $error_message[1] = 'Order number cannot be empty.';
+}
 
 // go back to the shipping page if there is an error
-if ($error_message != '') {
+if ($error_message != array()) {
   $_SESSION['label_error_message'] = $error_message;
-  $_SESSION['shipping_data'] = serialize($shipping_data); // TODO: remove the serialize -- can store array directly in session (unlike post or get arrays)
+  $_SESSION['shipping_data'] = $shipping_data;
   header('Location: shipping.php');
   exit();
 }
@@ -91,33 +101,46 @@ function count_digit($number)
 }
 
 // validate input data
-if (!array_key_exists($state, $states))
-  $error_message = 'State must be a valid state abbreviation.';
-else if (count_digit($zip_code) != 5)
-  $error_message = 'Zip code must be 5 digits.';
-else if ($zip_code < 0)
-  $error_message = 'Zip code must be positive.';
-else if ($zip_code > 99999)
-  $error_message = 'Zip code must be less than 99999.';
-else if ($package_weight > 150)
-  $error_message = 'Weight must be less than 150 pounds.';
-else if ($package_weight < 0)
-  $error_message = 'Weight must be positive.';
-else if ($length > 36)
-  $error_message = 'Length must be less than 36 inches.';
-else if ($width > 36)
-  $error_message = 'Width must be less than 36 inches.';
-else if ($height > 36)
-  $error_message = 'Height must be less than 36 inches.';
-else if ($length < 0)
-  $error_message = 'Length must be positive.';
-else if ($width < 0)
-  $error_message = 'Width must be positive.';
-else if ($height < 0)
-  $error_message = 'Height must be positive.';
+if (!array_key_exists($state, $states)){
+  $error_message[0] = 'state';
+  $error_message[1] = 'State must be a valid state abbreviation.';
+}else if (count_digit($zip_code) != 5){
+  $error_message[0] = 'zip';
+  $error_message[1] = 'Zip code must be 5 digits.';
+}else if ($zip_code < 0){
+  $error_message[0] = 'zip';
+  $error_message[1] = 'Zip code must be positive.';
+}else if ($zip_code > 99999){
+  $error_message[0] = 'zip';
+  $error_message[1] = 'Zip code must be less than 99999.';
+}else if ($package_weight > 150){
+  $error_message[0] = 'weight';
+  $error_message[1] = 'Weight must be less than 150 pounds.';
+}else if ($package_weight < 0){
+  $error_message[0] = 'weight';
+  $error_message[1] = 'Weight must be positive.';
+}else if ($length > 36){
+  $error_message[0] = 'dimensions';
+  $error_message[1] = 'Length must be less than 36 inches.';
+}else if ($width > 36){
+  $error_message[0] = 'dimensions';
+  $error_message[1] = 'Width must be less than 36 inches.';
+}else if ($height > 36){
+  $error_message[0] = 'dimensions';
+  $error_message[1] = 'Height must be less than 36 inches.';
+}else if ($length < 0){
+  $error_message[0] = 'dimensions';
+  $error_message[1] = 'Length must be positive.';
+}else if ($width < 0){
+  $error_message[0] = 'dimensions';
+  $error_message[1] = 'Width must be positive.';
+}else if ($height < 0){
+  $error_message[0] = 'dimensions';
+  $error_message[1] = 'Height must be positive.';
+}
 
 // go back to the shipping page if there is an error
-if ($error_message != '') {
+if ($error_message != array()) {
   $_SESSION['label_error_message'] = $error_message;
   $_SESSION['shipping_data'] = serialize($shipping_data);
   header('Location: shipping.php');
