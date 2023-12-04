@@ -13,7 +13,7 @@
                 </figure>
             </div>
             <div class="col-6">
-                <h5 style="margin-top: 75px">
+                <h5 style="margin-top: 92px">
                     Welcome to Hartrum's Pet Shop, where passion meets paws! As a cherished, family-owned establishment since 1985, we've been dedicated to bringing joy to the lives of both pets and their owners. Our expansive range includes a delightful selection of pets, from playful puppies and cuddly kittens to exotic birds and small mammals, all looking for their forever homes. <br><br>
 
                     But Hartrum's is more than just a pet store; we offer a full suite of services to ensure your furry (or feathered) family members receive the best care. Our on-site veterinary clinic is staffed with compassionate experts ready to tend to your pet's health needs. Plus, our experienced trainers are here to help you and your pet build a strong and loving bond, while our day camp and boarding services ensure a safe and happy environment for your furry (or feathered) family members when you can't be there. <br><br>

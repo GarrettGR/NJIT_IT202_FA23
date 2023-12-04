@@ -1,7 +1,8 @@
-body {
-  padding-top: 60px;
+main {
+  padding-top: 68px;
 }
 footer {
+  padding-top: 20px;
   padding-bottom: 20px;
 }
 .login {
@@ -50,4 +51,28 @@ footer {
   border: 0;
   border-radius: 0;
   border-bottom: 1px solid #fff;
+}
+
+/* shipping label styling */
+.label {
+  border: 1px solid black;
+  padding: 10px;
+  width: 300px;
+  background-color: white;
+}
+
+.label h2 {
+  margin: 0;
+}
+
+.label p {
+  margin: 0;
+}
+
+.label .address {
+  font-weight: bold;
+}
+
+.label .city-state-zip {
+  margin-top: 10px;
 }
