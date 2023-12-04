@@ -34,14 +34,15 @@ $statement->closeCursor();
         </div>
       <?php else : ?>
         <div class="col-3">
-          <h2><?php echo $animal['breadName']; ?></h2>
-          <p><?php echo $animal['description']; ?></p>
-          <p><?php echo $animal['price']; ?></p>
+          <h2>Name: <?php echo $animal['breadName']; ?></h2>
+          <p>Description: <?php echo $animal['description']; ?></p>
+          <p>Price: <?php echo $animal['price']; ?></p>
         </div>
         <div class="col-auto" id="display">
 
         <?php if (file_exists("src/img/animals/{$animal['breadCode']}.jpg")) : ?>
-          <img class="img-fluid" src="src/img/animals/<?php echo $animal['breadCode']; ?>.jpg" alt="<?php echo $animal['breadName']; ?>">
+          <img class="img-fluid" id="pet-image" src="src/img/animals/<?php echo $animal['breadCode']; ?>.jpg" alt="<?php echo $animal['breadName']; ?>">
+          <script src="src/js/modify_image.js"></script>
         <?php else : ?>
           <!-- access one of the photos from typicode since i don't have photos of all the animals -->
           <input type="hidden" id="breadID" value="<?php echo $animal['breadID']; ?>">
