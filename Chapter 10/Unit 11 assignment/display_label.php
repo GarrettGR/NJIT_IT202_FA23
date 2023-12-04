@@ -197,7 +197,7 @@ if ($error_message != array()) {
           <p>Tracking Number: <?php echo rand(9999999, 99999999); ?></p>
           <p>Ship Date: <?php echo $ship_date; ?></p>
           <figure>
-            <img style="width:100%; height:auto" src="images\barcode.jpg" alt=" shipping barcode" width="100px" height="100px">
+            <img style="width:100%; height:auto" src="src/img\barcode.jpg" alt=" shipping barcode" width="100px" height="100px">
           </figure>
         </div>
       </div>

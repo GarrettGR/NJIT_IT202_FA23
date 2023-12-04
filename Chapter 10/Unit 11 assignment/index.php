@@ -13,7 +13,7 @@
                 <h1 id="description" style="text-align:center; padding-top:0em">Family owned for over 30 years!</h1>
 >>>>>>> working on final assignment
                 <figure>
-                    <img src="images/pet-store-header.jpg" alt="pet store header" class="img-fluid">
+                    <img src="src/img/pet-store-header.jpg" alt="pet store header" class="img-fluid">
                 </figure>
             </div>
             <div class="col-6">
@@ -55,7 +55,7 @@
 =======
             <div class="col-3">
                 <figure>
-                    <img src="images\pet-food-1.jpg" alt="pet foods" class="img-fluid">
+                    <img src="src/img\pet-food-1.jpg" alt="pet foods" class="img-fluid">
                 </figure>
             </div>
             <div class="col-3">
@@ -63,7 +63,7 @@
             </div>
             <div class="col-3">
                 <figure>
-                    <img src="images\pet-food-0.jpg" alt="pet foods" class="img-fluid">
+                    <img src="src/img\pet-food-0.jpg" alt="pet foods" class="img-fluid">
                 </figure>
             </div>
             <div class="col-3">
@@ -75,13 +75,21 @@
         <div class="row">
             <div class="column">
                 <figure>
+<<<<<<< refs/remotes/origin/main
                     <img src="images\GettyImages-615090270.jpg" alt="pet store" class="responsiveIMG">
+=======
+                    <img src="src/img\pet-bird.jpg" alt="pet bird" class="img-fluid">
+>>>>>>> refactor image paths, add images for some animals
                 </figure>
                 <h2 class="responsiveTXT">Discover a heartwarming array of animals awaiting their forever homes at Hartrum's Pet Shop. From adorable puppies with wagging tails to vibrant parakeets with colorful plumage, our diverse selection of adoptable pets is sure to capture your heart. <h2>
             </div>
             <div class="column">
                 <figure>
+<<<<<<< refs/remotes/origin/main
                     <img src="images\atozpetsct.jpg" alt="pet store" class="responsiveIMG">
+=======
+                    <img src="src/img\pet-puppy.jpg" alt="pet puppy" class="img-fluid">
+>>>>>>> refactor image paths, add images for some animals
                 </figure>
                 <h2 class="responsiveTXT">All of out animals are eager to find a loving family, and our team is here to help you make a compassionate choice. Join us in finding a forever home for every one of our animals. <h2>
             </div>
@@ -94,13 +102,21 @@
             <div class="col-3 d-flex">
 >>>>>>> working on final assignment
                 <figure>
+<<<<<<< refs/remotes/origin/main
                     <img src="images\vet_services_collage_r2-2.jpg" alt="pet store" class="responsiveIMG">
+=======
+                    <img src="src/img\vet-services-0.jpg" alt="veterinatian services" class="img-fluid">
+>>>>>>> refactor image paths, add images for some animals
                 </figure>
                 <h2 class="responsiveTXT">Ensure your pet's well-being with our comprehensive veterinary services at Hartrum's Pet Shop. Our experienced team is here for regular checkups, providing preventive care to keep your furry or feathered friend in the best of health. <h2>
             </div>
             <div class="column">
                 <figure>
+<<<<<<< refs/remotes/origin/main
                     <img src="images\vet_services_collage_r2-1.jpg" alt="pet store" class="responsiveIMG">
+=======
+                    <img src="src/img\vet-services-1.jpg" alt="veterinatian services" class="img-fluid">
+>>>>>>> refactor image paths, add images for some animals
                 </figure>
                 <h2 class="responsiveTXT">n times of need, trust our skilled veterinarians for surgeries and emergency medical care, offering compassionate support and expertise to ensure your pet receives the best treatment possible. <h2>
             </div>
@@ -108,13 +124,21 @@
         <div class="row">
             <div class="column">
                 <figure>
+<<<<<<< refs/remotes/origin/main
                     <img src="images\boarding_collage_4.jpg" alt="pet store" class="responsiveIMG">
+=======
+                    <img src="src/img\boarding-services-0.jpg" alt="boarding services" class="img-fluid">
+>>>>>>> refactor image paths, add images for some animals
                 </figure>
                 <h2 class="responsiveTXT">For peace of mind when you can't be there, Hartrum's Pet Shop offers exceptional day camp and boarding services. Our safe and loving environment ensures your furry or feathered family members have a blast while you're away. <h2>
             </div>
             <div class="column">
                 <figure>
+<<<<<<< refs/remotes/origin/main
                     <img src="images/boarding_collage_5.jpg" alt="pet store" class="responsiveIMG">
+=======
+                    <img src="src/img/boarding-services-1.jpg" alt="boarding services" class="img-fluid">
+>>>>>>> refactor image paths, add images for some animals
                 </figure>
                 <h2 class="responsiveTXT">nd when it comes to building a strong and loving bond with your pet, our experienced trainers are here to guide you through every step, creating a harmonious connection that lasts a lifetime. <h2>
             </div>

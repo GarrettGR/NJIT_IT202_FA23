@@ -34,7 +34,7 @@
         <div class="container-fluid">
             <!-- image and brand name -->
             <a class="navbar-brand" href="index.php">
-                <img src="images\pet-store-icon.png" width="30" height="30" alt="" />
+                <img src="src/img\pet-store-icon.png" width="30" height="30" alt="" />
                 Hartrum's Pet Shop
             </a>
 
