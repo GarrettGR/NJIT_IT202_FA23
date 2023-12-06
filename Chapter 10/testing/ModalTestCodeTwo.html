@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+		<style>
+			
+			.modalA {
+				display: none;
+				position: fixed;
+				z-index: 1;
+				padding-top: 100px;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				overflow: auto;
+				background-color: rgb(0,0,0);
+				background-color: rgba(0,0,0,0.4);
+			} .modalB {
+				display: none;
+				position: fixed;
+				z-index: 1;
+				padding-top: 100px;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				overflow: auto;
+				background-color: rgb(0,0,0);
+				background-color: rgba(0,0,0,0.4);
+			} .modalA-content {
+				background-color: #fefefe;
+				margin: auto;
+				padding: 20px;
+				border: 1px solid #888;
+				width: 80%;
+				-webkit-animation-name: animatetop;
+				-webkit-animation-duration: 0.4s;
+			} .modalB-content {
+				background-color: #fefefe;
+				margin: auto;
+				padding: 20px;
+				border: 1px solid #888;
+				width: 80%;
+				-webkit-animation-name: animatetop;
+				-webkit-animation-duration: 0.4s;
+			} .modalAClose {
+				color: #aaaaaa;
+				float: right;
+				font-size: 28px;
+				font-weight: bold;
+			} .modalAClose:hover, .modalAClose:focus {
+				color: #000;
+				text-decoration: none;
+				cursor: pointer;
+			} .modalBClose {
+				color: #aaaaaa;
+				float: right;
+				font-size: 28px;
+				font-weight: bold;
+			} .modalBClose:hover, .modalBClose:focus {
+				color: #000;
+				text-decoration: none;
+				cursor: pointer;
+			} @-webkit-keyframes animatetop {
+				from {top:-300px; opacity:0} 
+				to {top:0; opacity:1}
+			} @keyframes animatetop {
+				from {top:-300px; opacity:0}
+				to {top:0; opacity:1}
+			}
+			
+		</style>
+		
+	</head>
+	<body>
+		
+		<button id="SourcesmodalAOpen"> click me, I make a modalA</button>
+		<button id="SourcesmodalBOpen"> click me, I make a modalB</button>
+
+		
+		<div id="SourcesmodalA" class="modalA">
+			<div class="modalA-content">
+				<span class="modalAClose">&times;</span>
+				<p>Links to Podcasts, Youtube Videos, Websites, and more (to content made by me and by other people)</p>
+			</div>
+		</div>
+		
+		<div id="SourcesmodalB" class="modalB">
+			<div class="modalB-content">
+				<span class="modalBClose">&times;</span>
+				<p>Links to other links</p>
+			</div>
+		</div>
+		
+		
+		
+		<script>
+			let modalA = document.getElementById("SourcesmodalA");
+			let modalB = document.getElementById("SourcesmodalB");
+			
+			btnA = document.getElementById("SourcesmodalAOpen");
+			btnB = document.getElementById("SourcesmodalBOpen");
+			
+			closeBtnA = document.getElementsByClassName("modalAClose")[0];
+			closeBtnB = document.getElementsByClassName("modalBClose")[0];
+			
+			btnA.onclick = function() { 
+				modalA.style.display = "block";
+			}
+			btnB.onclick = function () {
+				modalB.style.display = "block";
+			}
+			closeBtnA.onclick = function() { 
+				modalA.style.display = "none";
+			}			
+			closeBtnA.onclick - function () {
+				modalB.style.display = "none";
+			}
+			window.onclick = function(event) { 
+				if (event.target == modalA) modalA.style.display = "none"; 
+				if (event.target == modalB) modalB.style.display = "none"; 
+			}
+		</script>
+	</body>
+</html>
