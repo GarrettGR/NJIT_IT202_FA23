@@ -58,8 +58,6 @@ if ($error_message[0] != 0) {
   exit();
 }
 
-// ! NOT WORKING WHEN THERE ARE NO ENTRIES FOR A SPECIFIC ANIMAL TYPE
-
 // get or generate animal code
 if ($automatic_code) {
 
@@ -101,7 +99,7 @@ if ($automatic_code) {
   } else if (!ctype_alpha($animal_code)) {
     $error_message[0] = 'code';
     $error_message[1] = 'Animal code prefix must be all letters.';
-  } else if (in_array(($animal_code + "-%"), $codes)) {
+  } else if (in_array((($animal_code . "-%")), $codes)) {
     $error_message[0] = 'code';
     $error_message[1] = 'Animal code prefix must be unique.';
   } else {
