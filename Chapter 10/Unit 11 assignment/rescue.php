@@ -198,7 +198,6 @@ if (!isset($result)) {
   <?php } ?>
 
   <!-- php/jquery error message handling -->
-  <!-- //! NOT WORKING -->
   <?php if ($_SESSION['pet_error_message'] != array()) { ?>
     <?php if ($_SESSION['pet_error_message'][0] == 'type') { ?>
       <script>
