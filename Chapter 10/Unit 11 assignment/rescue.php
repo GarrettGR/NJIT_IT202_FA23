@@ -113,18 +113,19 @@ if (!isset($result)) {
               </div>
               <div class="mb-3" id="manual-override" style="display: none">
                 <div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="override-radio" id="numeric-override" value="numeric" checked>
-                    <label class="form-check-label" for="numeric-override">
-                      Override Numberic Value
-                    </label>
-                  </div>
                   <div id="prefix" name="prefix" class="form-check" style="display: none;">
                     <input class="form-check-input" type="radio" name="override-radio" id="prefix-override" value="prefix">
                     <label class="form-check-label" for="numeric-override">
                       Override Prefix Value
                     </label>
                   </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="override-radio" id="numeric-override" value="numeric" checked>
+                    <label class="form-check-label" for="numeric-override">
+                      Override Numberic Value
+                    </label>
+                  </div>
+
                   <div class="form-check">
                     <input class="form-check-input" type="radio" name="override-radio" id="entire-override" value="entire">
                     <label class="form-check-label" for="entire-override">
@@ -189,20 +190,14 @@ if (!isset($result)) {
       $('#prefix').show();
       $('automatic').prop('checked', false);
       $('#animal_code').show();
-
+      $('#animal-code').prop('placeholder', 'Ex: \'BRD\'');
+      $('#manual-override').show();
       $('#prefix-override').prop('checked', true);
-    </script>
-  <?php } else {?>
-    <script>
-      $('#prefix').hide();
-      $('#animal_code').hide();
-
-      $('automatic').prop('checked', false);
-      $('#prefix-override').prop('checked', false);
     </script>
   <?php } ?>
 
   <!-- php/jquery error message handling -->
+  <!-- //! NOT WORKING -->
   <?php if ($_SESSION['pet_error_message'] != array()) { ?>
     <?php if ($_SESSION['pet_error_message'][0] == 'type') { ?>
       <script>

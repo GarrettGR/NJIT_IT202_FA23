@@ -58,10 +58,7 @@ if ($error_message[0] != 0) {
   exit();
 }
 
-// TODO: handle automatic code generation (and everything else after that point)
-// echo "codes: ", var_dump($codes), '<br /><br />';
-// echo "animal data: ", var_dump($animal_data), '<br /><br />';
-// echo "automatic / overide: ", var_dump($automatic_code), '/ ', var_dump($override_code);
+// ! NOT WORKING WHEN THERE ARE NO ENTRIES FOR A SPECIFIC ANIMAL TYPE
 
 // get or generate animal code
 if ($automatic_code) {
