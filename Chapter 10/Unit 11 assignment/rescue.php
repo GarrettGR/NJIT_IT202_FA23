@@ -23,7 +23,11 @@ if (!isset($_SESSION['pet_error_message'])) {
   $_SESSION['pet_error_message'] = array();
 }
 
-if ($_SESSION['animal_data'] != array()){
+if (!isset($_SESSION['new_animal'])) {
+  $_SESSION['new_animal'] = false;
+}
+
+if ($_SESSION['animal_data'] != array()) {
   $animal_type = $_SESSION['animal_data']['animal_type'];
   $breadName = $_SESSION['animal_data']['animal_name'];
   $description = $_SESSION['animal_data']['animal_description'];
@@ -33,9 +37,6 @@ if ($_SESSION['animal_data'] != array()){
 //seeting default values for the variables
 if (!isset($breadCategoryID)) {
   $breadCategoryID = '';
-}
-if (!isset($breadCode)) {
-  $breadCode = '';
 }
 if (!isset($breadName)) {
   $breadName = '';
@@ -113,17 +114,19 @@ if (!isset($result)) {
               <div class="mb-3" id="manual-override" style="display: none">
                 <div>
                   <div class="form-check">
-                    <input class="form-check-input" type="radio" name="override-radio" 
-                    id="numeric-override"
-                    value="numeric" checked>
+                    <input class="form-check-input" type="radio" name="override-radio" id="numeric-override" value="numeric" checked>
                     <label class="form-check-label" for="numeric-override">
                       Override Numberic Value
                     </label>
                   </div>
+                  <div id="prefix" name="prefix" class="form-check" style="display: none;">
+                    <input class="form-check-input" type="radio" name="override-radio" id="prefix-override" value="prefix">
+                    <label class="form-check-label" for="numeric-override">
+                      Override Prefix Value
+                    </label>
+                  </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="radio" name="override-radio" 
-                    id="entire-override"
-                    value="entire">
+                    <input class="form-check-input" type="radio" name="override-radio" id="entire-override" value="entire">
                     <label class="form-check-label" for="entire-override">
                       Override Entire Animal Code
                     </label>
@@ -139,7 +142,7 @@ if (!isset($result)) {
                 <div class="invalid-feedback" id="animal-code-feedback">
                   Please enter a valid Animal Code.
                 </div>
-                <input type="text" class="form-control" id="animal-code" name="breadCode" value="<?php echo substr($breadCode, -3); ?>" placeholder="Ex. 006">
+                <input type="text" class="form-control" id="animal-code" name="breadCode" placeholder="Ex. 006">
               </div>
             </div>
           </div>
@@ -180,58 +183,77 @@ if (!isset($result)) {
 
   <script src="src/js/rescue_validation.js"></script>
 
+  <!-- show the prefix override if there is a new animal with no known prefix -->
+  <?php if ($_SESSION['new_animal'] == true) { ?>
+    <script>
+      $('#prefix').show();
+      $('automatic').prop('checked', false);
+      $('#animal_code').show();
+
+      $('#prefix-override').prop('checked', true);
+    </script>
+  <?php } else {?>
+    <script>
+      $('#prefix').hide();
+      $('#animal_code').hide();
+
+      $('automatic').prop('checked', false);
+      $('#prefix-override').prop('checked', false);
+    </script>
+  <?php } ?>
+
   <!-- php/jquery error message handling -->
-  <?php if($_SESSION['pet_error_message'] != array()) { ?>
-    <?php if($_SESSION['pet_error_message'][0]=='type') { ?>
+  <?php if ($_SESSION['pet_error_message'] != array()) { ?>
+    <?php if ($_SESSION['pet_error_message'][0] == 'type') { ?>
       <script>
         $('#animal_type').addClass('is-invalid');
         $('#animal-type-feedback').text('<?php echo $_SESSION['pet_error_message'][1]; ?>').show();
       </script>
-    <?php } else {?>
+    <?php } else { ?>
       <script>
         $('#animal_type').removeClass('is-invalid');
         $("#animal-type-feedback").hide();
       </script>
     <?php } ?>
-    <?php if($_SESSION['pet_error_message'][0]=='code') { ?>
+    <?php if ($_SESSION['pet_error_message'][0] == 'code') { ?>
       <script>
         $('#animal-code').addClass('is-invalid');
         $('#animal-code-feedback').text('<?php echo $_SESSION['pet_error_message'][1]; ?>').show();
       </script>
-    <?php } else {?>
+    <?php } else { ?>
       <script>
         $('#animal-code').removeClass('is-invalid');
         $("#animal-code-feedback").hide();
       </script>
     <?php } ?>
-    <?php if($_SESSION['pet_error_message'][0]=='name') { ?>
+    <?php if ($_SESSION['pet_error_message'][0] == 'name') { ?>
       <script>
         $('#animal-name').addClass('is-invalid');
         $('#animal-name-feedback').text('<?php echo $_SESSION['pet_error_message'][1]; ?>').show();
       </script>
-    <?php } else {?>
+    <?php } else { ?>
       <script>
         $('#animal-name').removeClass('is-invalid');
         $("#animal-name-feedback").hide();
       </script>
     <?php } ?>
-    <?php if($_SESSION['pet_error_message'][0]=='description') { ?>
+    <?php if ($_SESSION['pet_error_message'][0] == 'description') { ?>
       <script>
         $('#animal-description').addClass('is-invalid');
         $('#animal-description-feedback').text('<?php echo $_SESSION['pet_error_message'][1]; ?>').show();
       </script>
-    <?php } else {?>
+    <?php } else { ?>
       <script>
         $('#animal-description').removeClass('is-invalid');
         $("#animal-description-feedback").hide();
       </script>
     <?php } ?>
-    <?php if($_SESSION['pet_error_message'][0]=='price') { ?>
+    <?php if ($_SESSION['pet_error_message'][0] == 'price') { ?>
       <script>
         $('#animal-price').addClass('is-invalid');
         $('#animal-price-feedback').text('<?php echo $_SESSION['pet_error_message'][1]; ?>').show();
       </script>
-    <?php } else {?>
+    <?php } else { ?>
       <script>
         $('#animal-price').removeClass('is-invalid');
         $("#animal-price-feedback").hide();
@@ -242,6 +264,7 @@ if (!isset($result)) {
   <!-- unset the saved session animal data and error messages -->
   <?php unset($_SESSION['animal_data']); ?>
   <?php unset($_SESSION['pet_error_message']); ?>
+  <?php unset($_SESSION['new_animal']); ?>
 
   <?php include 'src/html/footer.html'; ?>
 </body>

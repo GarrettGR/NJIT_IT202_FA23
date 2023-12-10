@@ -14,15 +14,16 @@ $(document).ready(() => {
   // check the value of the radio button, if it is "numeric" then show the placeholder "006", if it is "entire" then show the placeholder "BRD-006"
   $(document).on("change", "input[name='override-radio']", function () {
     if ($(this).val() == "numeric") {
-      $("#animal_code").attr("placeholder", "006");
+      $("#animal-code").attr("placeholder", "Ex: '006'");
+    } else if ($(this).val() == "prefix") {
+      $("#animal-code").attr("placeholder", "Ex: 'BRD'");
     } else {
-      $("#animal_code").attr("placeholder", "BRD-006");
+      $("#animal-code").attr("placeholder", "Ex: 'BRD-006'");
     }
   });
 
   $("#rescue_form").on("submit", (event) => {
     let isValid = true;
-
     // Ensure an Animal Type is selected
     const animalType = $("#animal_type").val();
     if (animalType == 0) {
@@ -37,15 +38,52 @@ $(document).ready(() => {
     // Validate Animal Code only if "automatic" is unchecked
     if (!$("#automatic").is(":checked")) {
       const animalCode = $("#animal-code").val();
-      if (animalCode.length < 4 || animalCode.length > 10) {
-        isValid = false;
-        $("#animal-code").addClass("is-invalid");
-        $("#animal-code-feedback")
-          .text("Animal code must be between 4 and 10 characters")
-          .show();
+      let overrideType = $("input[name='override-radio']:checked").val();
+
+      if (overrideType == "numeric") {
+        if (animalCode.length < 3 || animalCode.length > 3) {
+          isValid = false;
+          $("#animal-code").addClass("is-invalid");
+          $("#animal-code-feedback")
+            .text("Animal code must be 3 characters")
+            .show();
+        } else {
+          $("#animal-code").removeClass("is-invalid");
+          $("#animal-code-feedback").hide();
+        }
+      } else if (overrideType == "prefix") {
+        if (animalCode.length < 3 || animalCode.length > 3) {
+          isValid = false;
+          $("#animal-code").addClass("is-invalid");
+          $("#animal-code-feedback")
+            .text("Animal code must be 3 characters")
+            .show();
+        } else {
+          $("#animal-code").removeClass("is-invalid");
+          $("#animal-code-feedback").hide();
+        }
+      } else if (overrideType == "entire") {
+        if (animalCode.length < 7 || animalCode.length > 7) {
+          isValid = false;
+          $("#animal-code").addClass("is-invalid");
+          $("#animal-code-feedback")
+            .text("Animal code must be 7 characters")
+            .show();
+        } else {
+          $("#animal-code").removeClass("is-invalid");
+          $("#animal-code-feedback").hide();
+        }
       } else {
-        $("#animal-code").removeClass("is-invalid");
-        $("#animal-code-feedback").hide();
+        if (animalCode.length < 4 || animalCode.length > 10) {
+          isValid = false;
+          $("#animal-code").addClass("is-invalid");
+          $("#animal-code-feedback")
+            .text("Animal code must be between 4 and 10 characters")
+            .show();
+        } else {
+          $("#animal-code").removeClass("is-invalid");
+          $("#animal-code-feedback").hide();
+        }
       }
     }
 

@@ -60,7 +60,7 @@ $data = $statement->fetchAll();
                   <?php $bread_code = $row['breadCode'] ?>
 
                   <td>
-                    <form action="delete.php" method="POST" onsubmit="return confirm('Are you sure?');">
+                    <form action="src/php/delete.php" method="POST" onsubmit="return confirm('Are you sure?');">
                       <input type="hidden" name="breadCode" value="<?php echo $bread_code ?>">
                       <input class="btn btn-outline-danger btn-sm" type="submit" value="Delete">
                     </form>
