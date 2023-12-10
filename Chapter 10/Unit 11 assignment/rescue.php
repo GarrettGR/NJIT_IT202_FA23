@@ -193,6 +193,7 @@ if (!isset($result)) {
       $('#animal-code').prop('placeholder', 'Ex: \'BRD\'');
       $('#manual-override').show();
       $('#prefix-override').prop('checked', true);
+      $('#automatic').prop('checked', false);
     </script>
   <?php } ?>
 
