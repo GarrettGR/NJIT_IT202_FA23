@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 body {
     padding-top: 50px;
 }
@@ -6,4 +7,83 @@ footer {
 }
 .login {
     padding-right: .5em;
+=======
+main {
+  padding: 68px 20px 0;
+}
+footer {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.login {
+  padding-right: 0.5em;
+}
+.logo {
+  margin-left: 0.5em;
+}
+.description {
+  margin-top: 77px;
+}
+
+/* login modal / form CSS */
+.modal-content {
+  width: 80%;
+  margin: 0 auto;
+}
+.modal-body {
+  padding: 0;
+}
+.btn-close {
+  position: absolute;
+  right: 0;
+  padding: 1em;
+}
+
+.myform {
+  padding: 2em;
+  max-width: 100%;
+  color: #fff;
+  box-shadow: 0 4px 6px 0 rgba(22, 22, 26, 0.18);
+}
+@media (max-width: 576px) {
+  .myform {
+    max-width: 90%;
+    margin: 0 auto;
+  }
+}
+.login-form-control:focus {
+  box-shadow: inset 0 -1px 0 #7e7e7e;
+}
+.login-form-control {
+  background-color: inherit;
+  color: #fff;
+  padding-left: 0;
+  border: 0;
+  border-radius: 0;
+  border-bottom: 1px solid #fff;
+}
+
+/* shipping label styling */
+.label {
+  border: 1px solid black;
+  padding: 10px;
+  width: 300px;
+  background-color: white;
+}
+
+.label h2 {
+  margin: 0;
+}
+
+.label p {
+  margin: 0;
+}
+
+.label .address {
+  font-weight: bold;
+}
+
+.label .city-state-zip {
+  margin-top: 10px;
+>>>>>>> origin/assignment-11
 }

@@ -1,24 +1,57 @@
 <header>
+<<<<<<< HEAD
   <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
     <!-- image and brand name -->
     <a class="navbar-brand" href="index.php">
       <img src="images\pet-store-icon.png" width="30" height="30" alt="" />
       Hartrum's Pet Shop
     </a>
+=======
+  <nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <!-- image and brand name -->
+      <a class="navbar-brand" href="index.php">
+        <img src="src/img\pet-store-icon.png" width="30" height="30" alt="" />
+        Hartrum's Pet Shop
+      </a>
+>>>>>>> origin/assignment-11
 
-    <!-- navbar toggler for responsive (small screens) -->
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-toggle="collapse"
-      data-target="#navbarNavDropdown"
-      aria-controls="navbarNavDropdown"
-      aria-expanded="true"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
+      <!-- navbar menu buttons -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <!-- dropdown for the "home" page with section headings for auto-scroll -->
+          <li class="nav-item dropdown">
+            <a
+              id="home-link"
+              class="nav-link dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Home
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="index.php">Home</a></li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li>
+                <a class="dropdown-item" href="index.php#description"
+                  >Description</a
+                >
+              </li>
+              <li><a class="dropdown-item" href="index.php#goods">Goods</a></li>
+              <li>
+                <a class="dropdown-item" href="index.php#animals">Animals</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="index.php#services">Services</a>
+              </li>
+            </ul>
+          </li>
 
+<<<<<<< HEAD
     <!-- navbar menu buttons -->
     <div class="navbar-collapse collapse show" id="navbarNavDropdown">
       <ul class="navbar-nav">
@@ -61,13 +94,70 @@
     <!-- div holding login/logout button & modal -->
     <div class="login pull-left">
       <!-- login button -->
+=======
+          <!-- other button options -->
+          <li class="nav-item">
+            <a
+              id="pets-link"
+              class="nav-link"
+              aria-current="page"
+              href="pets.php"
+              >Pets</a
+            >
+          </li>
+          <li class="nav-item">
+            <a id="rescue-link" class="nav-link disabled" aria-disabled="true">
+              Rescue
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              id="shipping-link"
+              class="nav-link disabled"
+              aria-disabled="true"
+            >
+              Shipping
+            </a>
+          </li>
+        </ul>
+      </div>
+      <!-- div holding login/logout button -->
+      <div class="mb-0" id="login-btn">
+        <button
+          type="button"
+          class="btn btn-dark"
+          data-bs-toggle="modal"
+          data-bs-target="#ModalForm"
+        >
+          Login
+        </button>
+      </div>
+      <div class="mb-0" id="logout-btn" style="display: none">
+        <form action="src/php/login.php" method="POST">
+          <input type="hidden" name="action" value="logout" />
+          <input type="submit" class="btn btn-dark" value="Logout" />
+        </form>
+      </div>
+      <div style="margin-left: 0.5em; display: inline" id="welcome-text"></div>
+      <!-- navbar toggler for responsive (small screens) -->
+>>>>>>> origin/assignment-11
       <button
+        class="navbar-toggler"
         type="button"
+<<<<<<< HEAD
         class="btn btn-outline-secondary"
         id="login-btn"
+=======
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+>>>>>>> origin/assignment-11
       >
-        Login
+        <span class="navbar-toggler-icon"></span>
       </button>
+<<<<<<< HEAD
 
       <!-- login modal -->
       <div class="modal fade" id="login-modal" role="dialog">
@@ -97,4 +187,65 @@
       </div>
     </div>
   </nav>
+=======
+    </div>
+  </nav>
+
+  <div
+    class="modal fade"
+    tabindex="-1"
+    role="dialog"
+    id="ModalForm"
+    aria-labelledby="ModalFormLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body">
+          <button
+            type="button"
+            class="btn-close btn-close-white"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+          <div class="myform bg-dark">
+            <h1 class="text-center">Login Form</h1>
+            <form action="src/php/login.php" method="POST">
+              <div class="text-danger pb-1" 
+              id="error-message"></div>
+              <div class="mb-3 mt-4">
+                <div class="invalid-feedback" id="email-feedback"></div>
+                <label for="email" class="form-label">Email address</label>
+                <input
+                  type="email"
+                  class="login-form-control"
+                  id="email"
+                  name="email"
+                  aria-describedby="emailHelp"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <div class="invalid-feedback" id="password-feedback"></div>
+                <label for="password" id="password-label" class="form-label"
+                  >Password</label
+                >
+                <input
+                  type="password"
+                  class="login-form-control"
+                  name="password"
+                  id="password"
+                  required
+                />
+              </div>
+              <input type="hidden" name="action" value="login" />
+              <button type="submit" class="btn btn-light mt-3">LOGIN</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="src/js/login_data.js"></script>
+>>>>>>> origin/assignment-11
 </header>
